@@ -5,5 +5,5 @@
 Computer engineering student.
 
 Void Linux, DWM and Lazyvim are my daily setup. I'm learning C/C++, Linux internals and computer networking.
-
+[My Blog](https://blog.linkola.workers.dev/)
 [LinkedIn](#)
