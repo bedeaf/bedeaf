@@ -23,7 +23,7 @@ I build sandboxes, window managers and small sharp tools in C/C++ and spend the 
   <img src="https://img.shields.io/badge/C-404040?style=flat-square&logo=c&logoColor=cfcfcf" alt="">
   <img src="https://img.shields.io/badge/C++-404040?style=flat-square&logo=cplusplus&logoColor=cfcfcf" alt="">
   <img src="https://img.shields.io/badge/Go-404040?style=flat-square&logo=go&logoColor=cfcfcf" alt="">
-  <img src="https://img.shields.io/badge/radare2-404040?style=flat-square&logo=gnubash&logoColor=cfcfcf" alt="">
+  <img src="https://img.shields.io/badge/reversing-radare2_·_binary_ninja_·_more-404040?style=flat-square&labelColor=202020&color=404040" alt="reversing: radare2, binary ninja and more">
 </p>
 
 <br clear="right">
