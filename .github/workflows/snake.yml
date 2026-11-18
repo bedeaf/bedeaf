@@ -12,8 +12,10 @@ jobs:
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/snake.svg?palette=github-light&color_snake=#000000&color_dots=#ebebeb,#bfbfbf,#808080,#404040,#000000
-            dist/snake-dark.svg?palette=github-dark&color_snake=#ffffff&color_dots=#161616,#404040,#606060,#a0a0a0,#dfdfdf
+            dist/snake.svg?palette=github-dark&color_snake=#cfcfcf&color_dots=#101010,#303030,#606060,#909090,#dfdfdf
+      - name: paint black panel behind the grid
+        run: |
+          sudo sed -i -E '0,/<svg[^>]*>/s//&<rect x="-100%" y="-100%" width="300%" height="300%" fill="#000"\/>/' dist/snake.svg
       - uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
