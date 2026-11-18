@@ -1,45 +1,52 @@
 <p align="center">
-  <img src="assets/header.svg" width="100%" alt="merthium — Linux systems & network engineering">
+  <img src="assets/header.svg" width="100%" alt="merthium — linux systems & network engineering">
 </p>
 
 <img align="right" src="assets/network.svg" width="22%" alt="">
 
 ### Linux Systems &<br>Network Engineering
 
-Computer engineering student.
+Computer Engineering.
 
-Void Linux, DWM and LazyVim are my daily setup. I'm learning C/C++, Linux internals and computer networking.
+I live in a terminal on Void Linux: runit, ZFS, a patched dwm and a monochrome LazyVim.
+I build sandboxes, window managers and small sharp tools in C/C++ and spend the rest of the time inside Linux internals, networking and disassemblers.
 
 <p>
-  <a href="https://blog.linkola.workers.dev/"><img src="https://img.shields.io/badge/blog-111111?style=flat-square&logo=cloudflare&logoColor=white" alt="Blog"></a>
-  <a href="#"><img src="https://img.shields.io/badge/linkedin-111111?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <img src="https://img.shields.io/badge/void_linux-f2f2f2?style=flat-square&logo=linux&logoColor=111111" alt="">
-  <img src="https://img.shields.io/badge/C-f2f2f2?style=flat-square&logo=c&logoColor=111111" alt="">
-  <img src="https://img.shields.io/badge/C++-f2f2f2?style=flat-square&logo=cplusplus&logoColor=111111" alt="">
-  <img src="https://img.shields.io/badge/Go-f2f2f2?style=flat-square&logo=go&logoColor=111111" alt="">
+  <a href="https://blog.linkola.workers.dev/"><img src="https://img.shields.io/badge/~/blog-000000?style=flat-square&logo=gnometerminal&logoColor=a0a0a0&labelColor=000000" alt="Blog"></a>
+  <a href="#"><img src="https://img.shields.io/badge/~/linkedin-000000?style=flat-square&logo=linkedin&logoColor=a0a0a0" alt="LinkedIn"></a>
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/void-202020?style=flat-square&logo=linux&logoColor=a0a0a0" alt="">
+  <img src="https://img.shields.io/badge/dwm-202020?style=flat-square&logo=x.org&logoColor=a0a0a0" alt="">
+  <img src="https://img.shields.io/badge/neovim-202020?style=flat-square&logo=neovim&logoColor=a0a0a0" alt="">
+  <img src="https://img.shields.io/badge/C-404040?style=flat-square&logo=c&logoColor=cfcfcf" alt="">
+  <img src="https://img.shields.io/badge/C++-404040?style=flat-square&logo=cplusplus&logoColor=cfcfcf" alt="">
+  <img src="https://img.shields.io/badge/Go-404040?style=flat-square&logo=go&logoColor=cfcfcf" alt="">
+  <img src="https://img.shields.io/badge/radare2-404040?style=flat-square&logo=gnubash&logoColor=cfcfcf" alt="">
 </p>
 
 <br clear="right">
 
-#### ▍ Projects
+```
+~/projects
+```
 
 | | |
-|---|---|
-| **[gom](https://github.com/merthium/gom)** | Play untrusted native Linux games in a layered sandbox — bubblewrap, gamescope, Landlock, seccomp. |
-| **[ppwm](https://github.com/merthium/ppwm)** | Minimal patchable C++20 X11 window manager with autotiling and XEmbed tray. |
-| **[linux-mentor](https://github.com/merthium/linux-mentor)** | Small, runnable Linux experiments in C, C++23 and Go. A new chapter every week. |
-| **[void-config](https://github.com/merthium/void-config)** | Void on a ThinkPad: runit, ZFS, dwm, DNSCrypt, nftables, measured. |
+|:--|:--|
+| **[gom](https://github.com/merthium/gom)** | play untrusted native Linux games in a layered sandbox: bubblewrap · gamescope · Landlock · seccomp |
+| **[ppwm](https://github.com/merthium/ppwm)** | minimal patchable C++20 X11 window manager: autotiling, periodic bar, XEmbed tray |
+| **[linux-mentor](https://github.com/merthium/linux-mentor)** | small runnable Linux experiments in C, C++23 and Go, a new chapter every week |
+| **[void-config](https://github.com/merthium/void-config)** | Void on a ThinkPad: runit, ZFS, dwm, DNSCrypt, nftables, every number measured |
+| **[nvim](https://github.com/merthium/nvim)** | LazyVim with project-aware builds, debugging and the monochrome UI you see above |
 
-#### ▍ Activity
+```
+~/activity
+```
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/merthium/merthium/output/snake-dark.svg">
   <img src="https://raw.githubusercontent.com/merthium/merthium/output/snake.svg" width="100%" alt="contribution snake">
 </picture>
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-activity-graph.vercel.app/graph?username=merthium&bg_color=0d1117&color=c9d1d9&line=f0f0f0&point=ffffff&area=true&area_color=8a8a8a&hide_border=true">
-    <img src="https://github-readme-activity-graph.vercel.app/graph?username=merthium&bg_color=ffffff&color=555555&line=111111&point=111111&area=true&area_color=bbbbbb&hide_border=true" width="100%" alt="activity graph">
-  </picture>
-</p>
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=merthium&bg_color=000000&color=606060&line=a0a0a0&point=cfcfcf&area=true&area_color=404040&hide_border=true&radius=6" width="100%" alt="activity graph">
