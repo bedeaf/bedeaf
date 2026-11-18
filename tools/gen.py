@@ -306,5 +306,17 @@ if __name__ == "__main__":
            "linkedin": link("~/linkedin", "in/***")}
     for i, (n, l, d) in enumerate(PROJECTS, 1):
         out[f"p-{n}"] = project(i, n, l, d)
+    # Content-hashed names: raw.githubusercontent caches for 5 min and browsers
+    # keep stale copies longer, so every change must get a fresh URL.
+    import glob, hashlib, os, re
+    readme = open("README.md").read()
     for k, v in out.items():
-        open(f"assets/{k}.svg", "w").write(v)
+        name = f"{k}.{hashlib.sha256(v.encode()).hexdigest()[:8]}.svg"
+        for old in glob.glob(f"assets/{k}.svg") + glob.glob(f"assets/{k}.[0-9a-f]*.svg"):
+            if os.path.basename(old) != name:
+                os.remove(old)
+        open(f"assets/{name}", "w").write(v)
+        readme, n = re.subn(rf'assets/{re.escape(k)}(\.[0-9a-f]{{8}})?\.svg"', f'assets/{name}"', readme)
+        if n == 0:
+            print(f"warning: README does not reference assets/{k}.svg")
+    open("README.md", "w").write(readme)
