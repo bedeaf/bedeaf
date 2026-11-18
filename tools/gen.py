@@ -10,8 +10,8 @@ BG, FG, DIM, MID, HI, EDGE = "#000000", "#a0a0a0", "#606060", "#808080", "#cfcfc
 def panel(h, body, extra_style=""):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" '
             f'font-family="{FONT}">\n<style>{extra_style}</style>\n'
-            f'<rect width="{W}" height="{h}" rx="6" fill="{BG}"/>\n'
-            f'<rect x=".5" y=".5" width="{W-1}" height="{h-1}" rx="6" fill="none" stroke="{EDGE}"/>\n'
+            f'<rect width="{W}" height="{h}" fill="{BG}"/>\n'
+            f'<rect x=".5" y=".5" width="{W-1}" height="{h-1}" fill="none" stroke="{EDGE}"/>\n'
             f'{body}\n</svg>\n')
 
 
@@ -42,8 +42,8 @@ def about():
          f'<text x="28" y="120" font-size="26" font-weight="700" fill="{HI}">Network Engineering</text>',
          f'<text x="28" y="150" font-size="14" fill="{MID}">Computer Engineering</text>',
          f'<text x="28" y="182" font-size="14" fill="{FG}">I live in a terminal on Void Linux: runit, ZFS, a patched dwm</text>',
-         f'<text x="28" y="202" font-size="14" fill="{FG}">and a monochrome LazyVim. I build sandboxes, window managers</text>',
-         f'<text x="28" y="222" font-size="14" fill="{FG}">and small sharp tools in C/C++, and live inside Linux internals,</text>',
+         f'<text x="28" y="202" font-size="14" fill="{FG}">and a monochrome LazyVim. I build window managers, system tools</text>',
+         f'<text x="28" y="222" font-size="14" fill="{FG}">and small sharp utilities in C/C++, and live inside Linux internals,</text>',
          f'<text x="28" y="242" font-size="14" fill="{FG}">networking and disassemblers.</text>']
     c1, _ = chips(28, 266, ["void", "runit", "zfs", "dwm", "neovim", "urxvt"], "#202020", FG)
     c2, x = chips(28, 298, ["C", "C++", "Go", "Lua"], "#404040", HI)
@@ -77,8 +77,51 @@ def link(label, sub):
             .replace(f'width="{W-1}" height="47"', f'width="{w-1}" height="47"'))
 
 
+def header():
+    import random
+    random.seed(11)
+    H = 260
+    name = "MERTHIUM"
+    glyphs = "#%&@$/\\|<>{}[]=+*01"
+    fs, cw = 84, 50.4
+    x0 = (W - len(name) * cw) / 2
+    o = [f'<rect width="{W}" height="{H}" fill="{BG}"/>']
+    # gray ramp columns (eyes.nvim ramp) breathing in the back
+    ramp = ["#0b0b0b", "#101010", "#171717", "#202020", "#303030"]
+    for i in range(45):
+        c = ramp[random.randrange(len(ramp))]
+        h = random.randint(14, 64)
+        d = random.uniform(3, 7)
+        o.append(f'<rect x="{i*20}" y="{H-h}" width="19" height="{h}" fill="{c}">'
+                 f'<animate attributeName="height" values="{h};{h*0.4:.0f};{h}" dur="{d:.1f}s" repeatCount="indefinite"/>'
+                 f'<animate attributeName="y" values="{H-h};{H-h*0.4:.0f};{H-h}" dur="{d:.1f}s" repeatCount="indefinite"/></rect>')
+    # decrypt-style name: each letter cycles through glyphs, then settles
+    for i, ch in enumerate(name):
+        x = x0 + i * cw
+        start = 0.3 + i * 0.18
+        seq = [random.choice(glyphs) for _ in range(7)]
+        for k, g in enumerate(seq):
+            t = start + k * 0.07
+            o.append(f'<text x="{x:.1f}" y="140" font-size="{fs}" font-weight="700" fill="{DIM}" visibility="hidden">{esc(g)}'
+                     f'<set attributeName="visibility" to="visible" begin="{t:.2f}s" dur="0.07s"/></text>')
+        o.append(f'<text x="{x:.1f}" y="140" font-size="{fs}" font-weight="700" fill="{HI}" visibility="hidden">{ch}'
+                 f'<set attributeName="visibility" to="visible" begin="{start+0.49:.2f}s" fill="freeze"/></text>')
+    end = 0.3 + len(name) * 0.18 + 0.5
+    # rule drawing under the name, then subtitle
+    o.append(f'<rect x="{x0:.0f}" y="166" width="0" height="2" fill="{FG}"><animate attributeName="width" from="0" to="{len(name)*cw:.0f}" begin="{end:.2f}s" dur="0.8s" fill="freeze"/></rect>')
+    o.append(f'<text x="{W/2}" y="200" font-size="16" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; NETWORK ENGINEERING'
+             f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.6:.2f}s" dur="1s" fill="freeze"/></text>')
+    # slow light sweep, like the hard light on the wallpaper
+    o.append('<defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
+             '<stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>')
+    o.append(f'<rect x="-260" width="260" height="{H}" fill="url(#sw)"><animate attributeName="x" from="-260" to="{W}" dur="8s" begin="{end:.2f}s" repeatCount="indefinite"/></rect>')
+    o.append(f'<rect x=".5" y=".5" width="{W-1}" height="{H-1}" fill="none" stroke="{EDGE}"/>')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">\n'
+            + "\n".join(o) + "\n</svg>\n")
+
+
 PROJECTS = [
-    ("gom", "C", "untrusted Linux games in a bwrap·landlock·seccomp cage"),
+    ("gom", "C", "native Linux games, isolated: bwrap · landlock · seccomp"),
     ("ppwm", "C++", "patchable C++20 X11 wm: autotiling, bar, XEmbed tray"),
     ("linux-mentor", "C", "runnable Linux experiments in C, C++23, Go. weekly"),
     ("void-config", "sh", "void on a ThinkPad: runit, ZFS, nftables, measured"),
@@ -86,7 +129,7 @@ PROJECTS = [
 ]
 
 if __name__ == "__main__":
-    out = {"about": about(), "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
+    out = {"header": header(), "about": about(), "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
            "activity": strip("git log --graph", "updated every 12h"),
            "blog": link("~/blog", "writeups"), "linkedin": link("~/linkedin", "in/***")}
     for i, (n, l, d) in enumerate(PROJECTS, 1):

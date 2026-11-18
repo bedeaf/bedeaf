@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="447" height="48" viewBox="0 0 447 48" font-family="'Liberation Mono',Menlo,Consolas,monospace">
 <style></style>
-<rect width="447" height="48" rx="6" fill="#000000"/>
-<rect x=".5" y=".5" width="446" height="47" rx="6" fill="none" stroke="#202020"/>
+<rect width="900" height="48" fill="#000000"/>
+<rect x=".5" y=".5" width="446" height="47" fill="none" stroke="#202020"/>
 <text x="28" y="30" font-size="15" fill="#cfcfcf">~/linkedin</text><text x="423" y="30" font-size="13" fill="#606060" text-anchor="end">in/*** →</text>
 </svg>
