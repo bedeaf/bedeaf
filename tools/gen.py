@@ -129,7 +129,7 @@ PROJECTS = [
 ]
 
 if __name__ == "__main__":
-    out = {"header": header(), "about": about(), "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
+    out = {"hero": header(), "about": about(), "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
            "activity": strip("git log --graph", "updated every 12h"),
            "blog": link("~/blog", "writeups"), "linkedin": link("~/linkedin", "in/***")}
     for i, (n, l, d) in enumerate(PROJECTS, 1):

@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/header.svg" width="100%" alt="merthium: linux systems & network engineering"></p>
+<p align="center"><img src="assets/hero.svg" width="100%" alt="merthium: linux systems & network engineering"></p>
 
 <p align="center"><img src="assets/about.svg" width="100%" alt="Linux Systems & Network Engineering. Computer Engineering. C, C++, Go, Linux internals, networking, reversing with radare2, Binary Ninja and more."></p>
 
