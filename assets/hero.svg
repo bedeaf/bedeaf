@@ -110,7 +110,7 @@
 <text x="601.2" y="140" font-size="84" font-weight="700" fill="#606060" visibility="hidden">1<set attributeName="visibility" to="visible" begin="1.98s" dur="0.07s"/></text>
 <text x="601.2" y="140" font-size="84" font-weight="700" fill="#cfcfcf" visibility="hidden">M<set attributeName="visibility" to="visible" begin="2.05s" fill="freeze"/></text>
 <rect x="248" y="166" width="0" height="2" fill="#a0a0a0"><animate attributeName="width" from="0" to="403" begin="2.24s" dur="0.8s" fill="freeze"/></rect>
-<text x="450.0" y="200" font-size="16" letter-spacing="3" fill="#a0a0a0" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; NETWORK ENGINEERING<animate attributeName="opacity" from="0" to="1" begin="2.84s" dur="1s" fill="freeze"/></text>
+<text x="450.0" y="200" font-size="16" letter-spacing="3" fill="#a0a0a0" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS<animate attributeName="opacity" from="0" to="1" begin="2.84s" dur="1s" fill="freeze"/></text>
 <defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
 <rect x="-260" width="260" height="260" fill="url(#sw)"><animate attributeName="x" from="-260" to="900" dur="8s" begin="2.24s" repeatCount="indefinite"/></rect>
 <rect x=".5" y=".5" width="899" height="259" fill="none" stroke="#202020"/>

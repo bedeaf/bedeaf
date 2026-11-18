@@ -1,8 +1,8 @@
-<p align="center"><img src="assets/hero.svg" width="100%" alt="merthium: linux systems & network engineering"></p>
+<p align="center"><img src="assets/hero.svg" width="100%" alt="merthium: linux systems & binary analysis"></p>
 
-<p align="center"><img src="assets/about.svg" width="100%" alt="Linux Systems & Network Engineering. Computer Engineering. C, C++, Go, Linux internals, networking, reversing with radare2, Binary Ninja and more."></p>
+<p align="center"><img src="assets/about.svg" width="100%" alt="Linux Systems & Binary Analysis. Computer Engineering. Reversing with radare2, Binary Ninja and more; tools in C/C++."></p>
 
-<p align="center"><a href="https://blog.linkola.workers.dev/"><img src="assets/blog.svg" width="49.5%" alt="blog"></a> <a href="#"><img src="assets/linkedin.svg" width="49.5%" alt="linkedin"></a></p>
+<p align="center"><a href="https://blog.linkola.workers.dev/"><img src="assets/blog.svg" width="32.8%" alt="blog"></a> <a href="https://crackmes.one/user/linkola"><img src="assets/crackmes.svg" width="32.8%" alt="crackmes.one"></a> <a href="#"><img src="assets/linkedin.svg" width="32.8%" alt="linkedin"></a></p>
 
 <p align="center"><img src="assets/projects.svg" width="100%" alt="projects"></p>
 <p align="center"><a href="https://github.com/merthium/gom"><img src="assets/p-gom.svg" width="100%" alt="gom"></a></p>
