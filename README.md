@@ -13,4 +13,4 @@
 
 <p align="center"><img src="assets/activity.765e670f.svg" width="100%" alt="activity"></p>
 <p align="center"><img src="../output/snake.svg" width="100%" alt="contribution snake"></p>
-<p align="center"><img src="https://github-readme-activity-graph.vercel.app/graph?username=merthium&bg_color=000000&color=606060&line=a0a0a0&point=cfcfcf&area=true&area_color=404040&hide_border=true&radius=6" width="100%" alt="activity graph"></p>
+<p align="center"><img src="https://github-readme-activity-graph.vercel.app/graph?username=bedeaf&bg_color=000000&color=606060&line=a0a0a0&point=cfcfcf&area=true&area_color=404040&hide_border=true&radius=6" width="100%" alt="activity graph"></p>
