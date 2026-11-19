@@ -2,7 +2,7 @@
 
 <p align="center"><img src="assets/about.7b80e16a.svg" width="100%" alt="Linux Systems & Binary Analysis. Computer Engineering. Reversing with radare2, Binary Ninja and more; tools in C/C++."></p>
 
-<p align="center"><a href="https://blog.linkola.workers.dev/"><img src="assets/blog.140403ed.svg" width="32.8%" alt="blog"></a> <a href="https://crackmes.one/user/linkola"><img src="assets/crackmes.f99bcd64.svg" width="32.8%" alt="crackmes.one"></a> <a href="#"><img src="assets/linkedin.692184b6.svg" width="32.8%" alt="linkedin"></a></p>
+<p align="center"><a href="https://bedeaf.pages.dev/"><img src="assets/blog.140403ed.svg" width="32.8%" alt="blog"></a> <a href="https://crackmes.one/user/linkola"><img src="assets/crackmes.f99bcd64.svg" width="32.8%" alt="crackmes.one"></a> <a href="#"><img src="assets/linkedin.692184b6.svg" width="32.8%" alt="linkedin"></a></p>
 
 <p align="center"><img src="assets/projects.94bcb0bd.svg" width="100%" alt="projects"></p>
 <p align="center"><a href="https://github.com/merthium/gom"><img src="assets/p-gom.07414a20.svg" width="100%" alt="gom"></a></p>
