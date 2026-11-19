@@ -251,9 +251,9 @@ def link(label, sub, w=W // 3 - 4):
 def header():
     import random
     random.seed(11)
-    H = 260
-    name = "MERTHIUM"
-    glyphs = "#%&@$/\\|<>{}[]=+*01"
+    H = 280
+    name = "BEDEAF"
+    glyphs = "0123456789ABCDEF"  # the name is itself hex, so it decodes from hex digits
     fs, cw = 84, 50.4
     x0 = (W - len(name) * cw) / 2
     o = [f'<rect width="{W}" height="{H}" fill="{BG}"/>']
@@ -261,27 +261,39 @@ def header():
     ramp = ["#0b0b0b", "#101010", "#171717", "#202020", "#303030"]
     for i in range(45):
         c = ramp[random.randrange(len(ramp))]
-        h = random.randint(14, 64)
+        h = random.randint(12, 40)
         d = random.uniform(3, 7)
         o.append(f'<rect x="{i*20}" y="{H-h}" width="19" height="{h}" fill="{c}">'
                  f'<animate attributeName="height" values="{h};{h*0.4:.0f};{h}" dur="{d:.1f}s" repeatCount="indefinite"/>'
                  f'<animate attributeName="y" values="{H-h};{H-h*0.4:.0f};{H-h}" dur="{d:.1f}s" repeatCount="indefinite"/></rect>')
-    # decrypt-style name: each letter cycles through glyphs, then settles
+    # the instruction that loads the name, shown first
+    o.append(f'<text x="{W/2}" y="62" font-size="14" fill="{DIM}" text-anchor="middle" opacity="0">'
+             f'mov <tspan fill="{FG}">eax</tspan>, <tspan fill="{HI}">0x00BEDEAF</tspan>'
+             f'<animate attributeName="opacity" from="0" to="1" begin="0.1s" dur="0.6s" fill="freeze"/></text>')
+    # decode-style name: each letter cycles through hex digits, then settles
     for i, ch in enumerate(name):
         x = x0 + i * cw
-        start = 0.3 + i * 0.18
-        seq = [random.choice(glyphs) for _ in range(7)]
+        start = 0.6 + i * 0.18
+        seq = [random.choice(glyphs.replace(ch, "")) for _ in range(7)]
         for k, g in enumerate(seq):
             t = start + k * 0.07
-            o.append(f'<text x="{x:.1f}" y="140" font-size="{fs}" font-weight="700" fill="{DIM}" visibility="hidden">{esc(g)}'
+            o.append(f'<text x="{x:.1f}" y="148" font-size="{fs}" font-weight="700" fill="{DIM}" visibility="hidden">{esc(g)}'
                      f'<set attributeName="visibility" to="visible" begin="{t:.2f}s" dur="0.07s"/></text>')
-        o.append(f'<text x="{x:.1f}" y="140" font-size="{fs}" font-weight="700" fill="{HI}" visibility="hidden">{ch}'
+        o.append(f'<text x="{x:.1f}" y="148" font-size="{fs}" font-weight="700" fill="{HI}" visibility="hidden">{ch}'
                  f'<set attributeName="visibility" to="visible" begin="{start+0.49:.2f}s" fill="freeze"/></text>')
-    end = 0.3 + len(name) * 0.18 + 0.5
-    # rule drawing under the name, then subtitle
-    o.append(f'<rect x="{x0:.0f}" y="166" width="0" height="2" fill="{FG}"><animate attributeName="width" from="0" to="{len(name)*cw:.0f}" begin="{end:.2f}s" dur="0.8s" fill="freeze"/></rect>')
-    o.append(f'<text x="{W/2}" y="200" font-size="16" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
-             f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.6:.2f}s" dur="1s" fill="freeze"/></text>')
+    end = 0.6 + len(name) * 0.18 + 0.5
+    # rule, then the dword as it lands in memory (little-endian), byte by byte
+    o.append(f'<rect x="{x0:.0f}" y="172" width="0" height="2" fill="{FG}"><animate attributeName="width" from="0" to="{len(name)*cw:.0f}" begin="{end:.2f}s" dur="0.8s" fill="freeze"/></rect>')
+    gx = W / 2 - 101  # "[rsp]" + gap + four bytes, centred as one group
+    o.append(f'<text x="{gx:.0f}" y="206" font-size="16" fill="{DIM}" opacity="0">[rsp]'
+             f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.8:.2f}s" dur="0.3s" fill="freeze"/></text>')
+    for k, byte in enumerate(["af", "de", "be", "00"]):
+        bx = gx + 66 + k * 38
+        o.append(f'<text x="{bx:.0f}" y="206" font-size="18" fill="{HI if byte != "00" else FG}" opacity="0">{byte}'
+                 f'<set attributeName="opacity" to="1" begin="{end+1.0+k*0.22:.2f}s" fill="freeze"/></text>')
+    end += 1.0 + 4 * 0.22
+    o.append(f'<text x="{W/2}" y="240" font-size="13" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
+             f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.2:.2f}s" dur="1s" fill="freeze"/></text>')
     # slow light sweep, like the hard light on the wallpaper
     o.append('<defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
              '<stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>')
