@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-"""Generate the black SVG panels used by README.md (run from repo root)."""
+"""Generate the SVG panels used by README.md (run from repo root).
+
+Panels are drawn in the black/#a0a0a0 ramp without a background, then
+written twice by theme.recolor: a dark and a light copy, which README.md
+picks between with <picture> so they sit on GitHub's own page color.
+"""
 import html
+
+from theme import recolor
 
 FONT = "'Liberation Mono',Menlo,Consolas,monospace"
 W = 900
-BG, FG, DIM, MID, HI, EDGE = "#000000", "#a0a0a0", "#606060", "#808080", "#cfcfcf", "#202020"
+FG, DIM, MID, HI, EDGE = "#a0a0a0", "#606060", "#808080", "#cfcfcf", "#202020"
 
 
 def panel(h, body, extra_style="", w=W):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'font-family="{FONT}">\n<style>{extra_style}</style>\n'
-            f'<rect width="{w}" height="{h}" fill="{BG}"/>\n'
             f'<rect x=".5" y=".5" width="{w-1}" height="{h-1}" fill="none" stroke="{EDGE}"/>\n'
             f'{body}\n</svg>\n')
 
@@ -256,7 +262,7 @@ def header():
     glyphs = "0123456789ABCDEF"  # the name is itself hex, so it decodes from hex digits
     fs, cw = 84, 50.4
     x0 = (W - len(name) * cw) / 2
-    o = [f'<rect width="{W}" height="{H}" fill="{BG}"/>']
+    o = []
     # gray ramp columns (eyes.nvim ramp) breathing in the back
     ramp = ["#0b0b0b", "#101010", "#171717", "#202020", "#303030"]
     for i in range(45):
@@ -322,13 +328,17 @@ if __name__ == "__main__":
     # keep stale copies longer, so every change must get a fresh URL.
     import glob, hashlib, os, re
     readme = open("README.md").read()
+    written = set()
     for k, v in out.items():
-        name = f"{k}.{hashlib.sha256(v.encode()).hexdigest()[:8]}.svg"
-        for old in glob.glob(f"assets/{k}.svg") + glob.glob(f"assets/{k}.[0-9a-f]*.svg"):
-            if os.path.basename(old) != name:
-                os.remove(old)
-        open(f"assets/{name}", "w").write(v)
-        readme, n = re.subn(rf'assets/{re.escape(k)}(\.[0-9a-f]{{8}})?\.svg"', f'assets/{name}"', readme)
-        if n == 0:
-            print(f"warning: README does not reference assets/{k}.svg")
+        for mode in ("dark", "light"):
+            svg = recolor(v, mode)
+            name = f"{k}-{mode}.{hashlib.sha256(svg.encode()).hexdigest()[:8]}.svg"
+            open(f"assets/{name}", "w").write(svg)
+            written.add(name)
+            readme, n = re.subn(rf'assets/{re.escape(k)}-{mode}(\.[0-9a-f]{{8}})?\.svg"', f'assets/{name}"', readme)
+            if n == 0:
+                print(f"warning: README does not reference assets/{k}-{mode}.svg")
+    for old in glob.glob("assets/*.svg"):
+        if os.path.basename(old) not in written:
+            os.remove(old)
     open("README.md", "w").write(readme)

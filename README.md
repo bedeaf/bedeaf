@@ -1,16 +1,16 @@
-<p align="center"><img src="assets/hero.d8ad710d.svg" width="100%" alt="bedeaf (0x00BEDEAF): linux systems & binary analysis"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.f4184e54.svg"><img src="assets/hero-light.fdda3ef7.svg" width="100%" alt="bedeaf (0x00BEDEAF): linux systems & binary analysis"></picture></p>
 
-<p align="center"><img src="assets/about.7b80e16a.svg" width="100%" alt="Linux Systems & Binary Analysis. Computer Engineering. Reversing with radare2, Binary Ninja and more; tools in C/C++."></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/about-dark.7524119b.svg"><img src="assets/about-light.b4509395.svg" width="100%" alt="Linux Systems & Binary Analysis. Computer Engineering. Reversing with radare2, Binary Ninja and more; tools in C/C++."></picture></p>
 
-<p align="center"><a href="https://bedeaf.pages.dev/"><img src="assets/blog.140403ed.svg" width="32.8%" alt="blog"></a> <a href="https://crackmes.one/user/linkola"><img src="assets/crackmes.f99bcd64.svg" width="32.8%" alt="crackmes.one"></a> <a href="#"><img src="assets/linkedin.692184b6.svg" width="32.8%" alt="linkedin"></a></p>
+<p align="center"><a href="https://bedeaf.pages.dev/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/blog-dark.dfaecfe2.svg"><img src="assets/blog-light.459bce40.svg" width="32.8%" alt="blog"></picture></a> <a href="https://crackmes.one/user/linkola"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/crackmes-dark.25ee76e9.svg"><img src="assets/crackmes-light.fc95f183.svg" width="32.8%" alt="crackmes.one"></picture></a> <a href="#"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/linkedin-dark.1dff2d46.svg"><img src="assets/linkedin-light.eaebf31a.svg" width="32.8%" alt="linkedin"></picture></a></p>
 
-<p align="center"><img src="assets/projects.94bcb0bd.svg" width="100%" alt="projects"></p>
-<p align="center"><a href="https://github.com/merthium/gom"><img src="assets/p-gom.07414a20.svg" width="100%" alt="gom"></a></p>
-<p align="center"><a href="https://github.com/merthium/ppwm"><img src="assets/p-ppwm.4825bc4f.svg" width="100%" alt="ppwm"></a></p>
-<p align="center"><a href="https://github.com/merthium/linux-mentor"><img src="assets/p-linux-mentor.ab0548ed.svg" width="100%" alt="linux-mentor"></a></p>
-<p align="center"><a href="https://github.com/merthium/void-config"><img src="assets/p-void-config.185aa5b5.svg" width="100%" alt="void-config"></a></p>
-<p align="center"><a href="https://github.com/merthium/nvim"><img src="assets/p-nvim.26b5ed22.svg" width="100%" alt="nvim"></a></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/projects-dark.6fd6435c.svg"><img src="assets/projects-light.cbc96504.svg" width="100%" alt="projects"></picture></p>
+<p align="center"><a href="https://github.com/merthium/gom"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/p-gom-dark.4bed6354.svg"><img src="assets/p-gom-light.75b79b2d.svg" width="100%" alt="gom"></picture></a></p>
+<p align="center"><a href="https://github.com/merthium/ppwm"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/p-ppwm-dark.af1ce8fa.svg"><img src="assets/p-ppwm-light.0cfed08a.svg" width="100%" alt="ppwm"></picture></a></p>
+<p align="center"><a href="https://github.com/merthium/linux-mentor"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/p-linux-mentor-dark.be4e4a18.svg"><img src="assets/p-linux-mentor-light.1d1cf170.svg" width="100%" alt="linux-mentor"></picture></a></p>
+<p align="center"><a href="https://github.com/merthium/void-config"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/p-void-config-dark.51b868b2.svg"><img src="assets/p-void-config-light.4231b3da.svg" width="100%" alt="void-config"></picture></a></p>
+<p align="center"><a href="https://github.com/merthium/nvim"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/p-nvim-dark.a7ca6c55.svg"><img src="assets/p-nvim-light.1e4a82c2.svg" width="100%" alt="nvim"></picture></a></p>
 
-<p align="center"><img src="assets/activity.765e670f.svg" width="100%" alt="activity"></p>
-<p align="center"><img src="../output/snake.svg" width="100%" alt="contribution snake"></p>
-<p align="center"><img src="https://github-readme-activity-graph.vercel.app/graph?username=bedeaf&bg_color=000000&color=606060&line=a0a0a0&point=cfcfcf&area=true&area_color=404040&hide_border=true&radius=6" width="100%" alt="activity graph"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.975ad93c.svg"><img src="assets/activity-light.4ccdcc78.svg" width="100%" alt="activity"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="../output/snake-dark.svg"><img src="../output/snake-light.svg" width="100%" alt="contribution snake"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github-readme-activity-graph.vercel.app/graph?username=bedeaf&area=true&hide_border=true&radius=6&bg_color=00000000&color=ffffff60&line=ffffffa0&point=ffffffcf&area_color=ffffff40"><img src="https://github-readme-activity-graph.vercel.app/graph?username=bedeaf&area=true&hide_border=true&radius=6&bg_color=ffffff00&color=8d8d8d&line=505050&point=2f2f2f&area_color=b6b6b6" width="100%" alt="activity graph"></picture></p>

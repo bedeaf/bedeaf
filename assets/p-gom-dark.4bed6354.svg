@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="56" viewBox="0 0 900 56" font-family="'Liberation Mono',Menlo,Consolas,monospace">
+<style>.u{animation:u 5s ease-in-out 0.6s infinite}@keyframes u{0%,60%{width:0}75%,90%{width:120px}100%{width:0}}</style>
+<rect x=".5" y=".5" width="899" height="55" fill="none" stroke="#ffffff20"/>
+<text x="28" y="34" font-size="13" fill="#ffffff60">01</text><text x="66" y="34" font-size="17" font-weight="700" fill="#ffffffcf">gom</text><text x="232" y="34" font-size="14" fill="#ffffffa0">native Linux games, isolated: bwrap · landlock · seccomp</text><rect x="814" y="17" width="58" height="22" fill="#ffffff20"/><text x="843" y="32.5" font-size="12" fill="#ffffff80" text-anchor="middle">C</text><rect class="u" x="66" y="42" width="0" height="2" fill="#ffffffa0"/>
+</svg>
