@@ -248,7 +248,7 @@ def project(i, name, lang, desc):
     return panel(56, body, css)
 
 
-def link(label, sub, w=W // 3 - 4):
+def link(label, sub, w=W // 2 - 4):
     body = (f'<text x="24" y="30" font-size="15" fill="{HI}">{esc(label)}</text>'
             f'<text x="{w-20}" y="30" font-size="13" fill="{DIM}" text-anchor="end">{esc(sub)} →</text>')
     return panel(48, body, w=w)
@@ -320,8 +320,7 @@ PROJECTS = [
 if __name__ == "__main__":
     out = {"hero": header(), "about": about(), "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
            "activity": strip("git log --graph", "updated every 12h"),
-           "blog": link("~/blog", "writeups"), "crackmes": link("~/crackmes", "linkola"),
-           "linkedin": link("~/linkedin", "in/***")}
+           "blog": link("~/blog", "writeups"), "crackmes": link("~/crackmes", "linkola")}
     for i, (n, l, d) in enumerate(PROJECTS, 1):
         out[f"p-{n}"] = project(i, n, l, d)
     # Content-hashed names: raw.githubusercontent caches for 5 min and browsers
