@@ -1,6 +1,6 @@
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.f4184e54.svg"><img src="assets/hero-light.fdda3ef7.svg" width="100%" alt="bedeaf (0x00BEDEAF): linux systems & binary analysis"></picture></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/about-dark.7524119b.svg"><img src="assets/about-light.b4509395.svg" width="100%" alt="Linux Systems & Binary Analysis. Computer Engineering. Reversing with radare2, Binary Ninja and more; tools in C/C++."></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/about-dark.9ed11fd8.svg"><img src="assets/about-light.dbc2b07c.svg" width="100%" alt="Linux Systems & Binary Analysis. Computer Engineering. Reversing with radare2, Binary Ninja and more; tools in C/C++."></picture></p>
 
 <p align="center"><a href="https://bedeaf.pages.dev/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/blog-dark.59f51fd4.svg"><img src="assets/blog-light.3df85d62.svg" width="49%" alt="blog"></picture></a> <a href="https://crackmes.one/user/linkola"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/crackmes-dark.c6512346.svg"><img src="assets/crackmes-light.a6ef106a.svg" width="49%" alt="crackmes.one"></picture></a></p>
 
