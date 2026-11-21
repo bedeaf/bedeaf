@@ -14,10 +14,12 @@ W = 900
 FG, DIM, MID, HI, EDGE = "#a0a0a0", "#606060", "#808080", "#cfcfcf", "#202020"
 
 
-def panel(h, body, extra_style="", w=W):
+def panel(h, body, extra_style="", w=W, inset=0):
+    # inset: cards draw their frame 4px in, so neighbours keep a gap both
+    # side by side (desktop) and stacked (phone)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'font-family="{FONT}">\n<style>{extra_style}</style>\n'
-            f'<rect x=".5" y=".5" width="{w-1}" height="{h-1}" fill="none" stroke="{EDGE}"/>\n'
+            f'<rect x="{inset+.5}" y="{inset+.5}" width="{w-1-2*inset}" height="{h-1-2*inset}" fill="none" stroke="{EDGE}"/>\n'
             f'{body}\n</svg>\n')
 
 
@@ -204,54 +206,86 @@ def esc(s):
     return html.escape(s, quote=False)
 
 
-def chips(x, y, items, fill, color):
-    out = []
-    for label in items:
-        w = len(label) * 7.8 + 18
-        out.append(f'<rect x="{x}" y="{y}" width="{w:.0f}" height="24" fill="{fill}"/>'
-                   f'<text x="{x+9}" y="{y+16.5}" font-size="13" fill="{color}">{esc(label)}</text>')
-        x += w + 6
-    return "".join(out), x
+# Layout: wide pieces (hero, section strips, snake, graph) scale with the page;
+# everything else is a TW-wide card. Two cards fit side by side in GitHub's
+# desktop README column (~820px) and wrap to one column on phones, where they
+# only shrink to ~80%, so text stays readable.
+TW = 404
+PAD = 24
 
 
-def about():
-    graph, gb = cfg(ox=596, cx=742, oy=62)
-    b = [f'<text x="28" y="50" font-size="13" fill="{DIM}">$ cat ~/about</text>',
-         f'<text x="28" y="90" font-size="26" font-weight="700" fill="{HI}">Linux Systems &amp;</text>',
-         f'<text x="28" y="122" font-size="26" font-weight="700" fill="{HI}">Binary Analysis</text>',
-         f'<text x="28" y="154" font-size="14" fill="{MID}">Computer Engineering</text>',
-         f'<text x="28" y="190" font-size="14" fill="{FG}">I live in a terminal on Void Linux: runit, ZFS, a patched</text>',
-         f'<text x="28" y="211" font-size="14" fill="{FG}">dwm and a monochrome LazyVim. Mostly I take binaries</text>',
-         f'<text x="28" y="232" font-size="14" fill="{FG}">apart: crackmes, stripped ELFs, anything that ships</text>',
-         f'<text x="28" y="253" font-size="14" fill="{FG}">without source. The tools I need, I write in C/C++.</text>']
-    c1, _ = chips(28, 280, ["void", "runit", "zfs", "dwm", "neovim", "urxvt"], "#202020", FG)
-    c2, x = chips(28, 312, ["C", "C++", "Go", "Lua"], "#404040", HI)
-    c3, _ = chips(x + 8, 312, ["reversing:", "radare2", "binary ninja", "more"], "#171717", FG)
-    h = max(356, int(gb) + 18)
-    return panel(h, "\n".join(b) + c1 + c2 + c3 + graph)
+def chip_flow(x0, y0, groups, right):
+    """Chips that wrap inside [x0, right]; groups: (labels, fill, color, gap_before)."""
+    out, x, y = [], x0, y0
+    for labels, fill, color, gap in groups:
+        if x > x0:
+            x += gap
+        for label in labels:
+            w = len(label) * 7.8 + 18
+            if x > x0 and x + w > right:
+                x, y = x0, y + 30
+            out.append(f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="24" fill="{fill}"/>'
+                       f'<text x="{x+9:.0f}" y="{y+16.5}" font-size="13" fill="{color}">{esc(label)}</text>')
+            x += w + 6
+    return "".join(out), y + 24
+
+
+ABOUT = ("I live in a terminal on Void Linux: runit, ZFS, a patched dwm and a monochrome "
+         "LazyVim. Mostly I take binaries apart: crackmes, stripped ELFs, anything that "
+         "ships without source. The tools I need, I write in C/C++.")
+
+
+def about_cards():
+    import textwrap
+    b = [f'<text x="{PAD}" y="40" font-size="13" fill="{DIM}">$ cat ~/about</text>',
+         f'<text x="{PAD}" y="78" font-size="26" font-weight="700" fill="{HI}">Linux Systems &amp;</text>',
+         f'<text x="{PAD}" y="110" font-size="26" font-weight="700" fill="{HI}">Binary Analysis</text>',
+         f'<text x="{PAD}" y="140" font-size="14" fill="{MID}">Computer Engineering</text>']
+    y = 176
+    for line in textwrap.wrap(ABOUT, 41):
+        b.append(f'<text x="{PAD}" y="{y}" font-size="14" fill="{FG}">{esc(line)}</text>')
+        y += 21
+    chips, cy = chip_flow(PAD, y + 4, [
+        (["void", "runit", "zfs", "dwm", "neovim", "urxvt"], "#202020", FG, 0),
+        (["C", "C++", "Go", "Lua"], "#404040", HI, 14),
+        (["reversing:", "radare2", "binary ninja", "more"], "#171717", FG, 14)], TW - PAD)
+    # the r2 graph, drawn in its own coordinates and scaled into the card
+    s, lx, ly = 1.3, 127, 24                  # extents ~[0, 265] x [0, 306] before scaling
+    graph, gb = cfg(ox=0, cx=lx, oy=ly)
+    gw = 265 * s
+    tx = (TW - gw) / 2
+    h = int(max(cy + PAD, 20 + (gb + 4) * s + 20))
+    g = f'<g transform="translate({tx:.1f},20) scale({s})">{graph}</g>'
+    return panel(h, "\n".join(b) + chips, w=TW, inset=4), panel(h, g, w=TW, inset=4)
 
 
 def strip(label, right=""):
-    body = (f'<text x="28" y="30" font-size="14" fill="{DIM}">$ <tspan fill="{HI}">{esc(label)}</tspan></text>'
-            f'<text x="{W-28}" y="30" font-size="13" fill="{DIM}" text-anchor="end">{esc(right)}</text>')
-    return panel(48, body)
+    """Full-width section header. Drawn 700 wide so it scales ~1.2x on desktop
+    and ~0.47x on phones, where 22px type still lands near 10px."""
+    w = 700
+    body = (f'<text x="26" y="34" font-size="22" fill="{DIM}">$ <tspan fill="{HI}">{esc(label)}</tspan></text>'
+            f'<text x="{w-26}" y="33" font-size="18" fill="{DIM}" text-anchor="end">{esc(right)}</text>')
+    return panel(52, body, w=w)
 
 
-def project(i, name, lang, desc):
-    body = (f'<text x="28" y="34" font-size="13" fill="{DIM}">{i:02d}</text>'
-            f'<text x="66" y="34" font-size="17" font-weight="700" fill="{HI}">{esc(name)}</text>'
-            f'<text x="232" y="34" font-size="14" fill="{FG}">{esc(desc)}</text>'
-            f'<rect x="{W-86}" y="17" width="58" height="22" fill="#202020"/>'
-            f'<text x="{W-57}" y="32.5" font-size="12" fill="{MID}" text-anchor="middle">{esc(lang)}</text>'
-            f'<rect class="u" x="66" y="42" width="0" height="2" fill="{FG}"/>')
-    css = ".u{animation:u 5s ease-in-out %ss infinite}@keyframes u{0%%,60%%{width:0}75%%,90%%{width:120px}100%%{width:0}}" % (i * 0.6)
-    return panel(56, body, css)
+def project(num, name, lang, desc, delay):
+    import textwrap
+    body = [f'<text x="{PAD}" y="36" font-size="13" fill="{DIM}">{esc(num)}</text>',
+            f'<text x="{PAD+34}" y="36" font-size="17" font-weight="700" fill="{HI}">{esc(name)}</text>',
+            f'<rect x="{TW-PAD-52}" y="20" width="52" height="22" fill="#202020"/>',
+            f'<text x="{TW-PAD-26}" y="35.5" font-size="12" fill="{MID}" text-anchor="middle">{esc(lang)}</text>',
+            f'<rect class="u" x="{PAD+34}" y="44" width="0" height="2" fill="{FG}"/>']
+    for k, line in enumerate(textwrap.wrap(desc, 44)[:2]):
+        body.append(f'<text x="{PAD}" y="{68 + k * 19}" font-size="13" fill="{FG}">{esc(line)}</text>')
+    css = (".u{animation:u 5s ease-in-out %.1fs infinite}"
+           "@keyframes u{0%%,60%%{width:0}75%%,90%%{width:%dpx}100%%{width:0}}" % (delay, round(len(name) * 10.2)))
+    return panel(110, "".join(body), css, w=TW, inset=4)
 
 
-def link(label, sub, w=W // 2 - 4):
-    body = (f'<text x="24" y="30" font-size="15" fill="{HI}">{esc(label)}</text>'
-            f'<text x="{w-20}" y="30" font-size="13" fill="{DIM}" text-anchor="end">{esc(sub)} →</text>')
-    return panel(48, body, w=w)
+def link(label, sub):
+    body = (f'<text x="{PAD}" y="32" font-size="15" fill="{HI}">{esc(label)}</text>'
+            f'<text x="{TW-PAD}" y="32" font-size="13" fill="{DIM}" text-anchor="end">{esc(sub)} →</text>')
+    return panel(52, body, w=TW, inset=4)
 
 
 def header():
@@ -273,7 +307,7 @@ def header():
                  f'<animate attributeName="height" values="{h};{h*0.4:.0f};{h}" dur="{d:.1f}s" repeatCount="indefinite"/>'
                  f'<animate attributeName="y" values="{H-h};{H-h*0.4:.0f};{H-h}" dur="{d:.1f}s" repeatCount="indefinite"/></rect>')
     # the instruction that loads the name, shown first
-    o.append(f'<text x="{W/2}" y="62" font-size="14" fill="{DIM}" text-anchor="middle" opacity="0">'
+    o.append(f'<text x="{W/2}" y="58" font-size="20" fill="{DIM}" text-anchor="middle" opacity="0">'
              f'mov <tspan fill="{FG}">eax</tspan>, <tspan fill="{HI}">0x00BEDEAF</tspan>'
              f'<animate attributeName="opacity" from="0" to="1" begin="0.1s" dur="0.6s" fill="freeze"/></text>')
     # decode-style name: each letter cycles through hex digits, then settles
@@ -290,15 +324,15 @@ def header():
     end = 0.6 + len(name) * 0.18 + 0.5
     # rule, then the dword as it lands in memory (little-endian), byte by byte
     o.append(f'<rect x="{x0:.0f}" y="172" width="0" height="2" fill="{FG}"><animate attributeName="width" from="0" to="{len(name)*cw:.0f}" begin="{end:.2f}s" dur="0.8s" fill="freeze"/></rect>')
-    gx = W / 2 - 101  # "[rsp]" + gap + four bytes, centred as one group
-    o.append(f'<text x="{gx:.0f}" y="206" font-size="16" fill="{DIM}" opacity="0">[rsp]'
+    gx = W / 2 - 131  # "[rsp]" + gap + four bytes, centred as one group
+    o.append(f'<text x="{gx:.0f}" y="210" font-size="22" fill="{DIM}" opacity="0">[rsp]'
              f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.8:.2f}s" dur="0.3s" fill="freeze"/></text>')
     for k, byte in enumerate(["af", "de", "be", "00"]):
-        bx = gx + 66 + k * 38
-        o.append(f'<text x="{bx:.0f}" y="206" font-size="18" fill="{HI if byte != "00" else FG}" opacity="0">{byte}'
+        bx = gx + 86 + k * 48
+        o.append(f'<text x="{bx:.0f}" y="210" font-size="26" fill="{HI if byte != "00" else FG}" opacity="0">{byte}'
                  f'<set attributeName="opacity" to="1" begin="{end+1.0+k*0.22:.2f}s" fill="freeze"/></text>')
     end += 1.0 + 4 * 0.22
-    o.append(f'<text x="{W/2}" y="240" font-size="13" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
+    o.append(f'<text x="{W/2}" y="244" font-size="18" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
              f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.2:.2f}s" dur="1s" fill="freeze"/></text>')
     # slow light sweep, like the hard light on the wallpaper
     o.append('<defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
@@ -316,28 +350,62 @@ PROJECTS = [
     ("void-config", "sh", "void on a ThinkPad: runit, ZFS, nftables, measured"),
     ("nvim", "Lua", "LazyVim: project-aware builds, debugging, monochrome"),
 ]
+GH = "https://github.com/bedeaf"
+SNAKE = ('<picture><source media="(prefers-color-scheme: dark)" srcset="../output/snake-dark.svg">'
+         '<img src="../output/snake-light.svg" width="100%" alt="contribution snake"></picture>')
+GRAPH = "https://github-readme-activity-graph.vercel.app/graph?username=bedeaf&area=true&hide_border=true&radius=6"
+GRAPH_DARK = GRAPH + "&bg_color=00000000&color=ffffff60&line=ffffffa0&point=ffffffcf&area_color=ffffff40"
+GRAPH_LIGHT = GRAPH + "&bg_color=ffffff00&color=8d8d8d&line=505050&point=2f2f2f&area_color=b6b6b6"
 
 if __name__ == "__main__":
-    out = {"hero": header(), "about": about(), "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
+    about, trace = about_cards()
+    out = {"hero": header(), "about": about, "trace": trace,
+           "blog": link("~/blog", "writeups"), "crackmes": link("~/crackmes", "linkola"),
+           "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
            "activity": strip("git log --graph", "updated every 12h"),
-           "blog": link("~/blog", "writeups"), "crackmes": link("~/crackmes", "linkola")}
+           "more": project("··", "more", "all", "every repository, forks and upstream patches", 3.6)}
     for i, (n, l, d) in enumerate(PROJECTS, 1):
-        out[f"p-{n}"] = project(i, n, l, d)
+        out[f"p-{n}"] = project(f"{i:02d}", n, l, d, i * 0.6)
+
     # Content-hashed names: raw.githubusercontent caches for 5 min and browsers
     # keep stale copies longer, so every change must get a fresh URL.
-    import glob, hashlib, os, re
-    readme = open("README.md").read()
-    written = set()
+    import glob, hashlib, os
+    names = {}
     for k, v in out.items():
         for mode in ("dark", "light"):
             svg = recolor(v, mode)
-            name = f"{k}-{mode}.{hashlib.sha256(svg.encode()).hexdigest()[:8]}.svg"
-            open(f"assets/{name}", "w").write(svg)
-            written.add(name)
-            readme, n = re.subn(rf'assets/{re.escape(k)}-{mode}(\.[0-9a-f]{{8}})?\.svg"', f'assets/{name}"', readme)
-            if n == 0:
-                print(f"warning: README does not reference assets/{k}-{mode}.svg")
+            names[k, mode] = f"{k}-{mode}.{hashlib.sha256(svg.encode()).hexdigest()[:8]}.svg"
+            open(f"assets/{names[k, mode]}", "w").write(svg)
     for old in glob.glob("assets/*.svg"):
-        if os.path.basename(old) not in written:
+        if os.path.basename(old) not in {n for n in names.values()}:
             os.remove(old)
-    open("README.md", "w").write(readme)
+
+    def pic(k, alt, wide=False):
+        # wide pieces scale with the page; cards keep their own width (max 100%)
+        w = ' width="100%"' if wide else ""
+        return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="assets/{names[k, "dark"]}">'
+                f'<img src="assets/{names[k, "light"]}"{w} alt="{html.escape(alt)}"></picture>')
+
+    def a(href, inner):
+        return f'<a href="{href}">{inner}</a>'
+
+    def row(*items):
+        return '<p align="center">' + " ".join(items) + "</p>"
+
+    cards = [a(f"{GH}/{n}", pic(f"p-{n}", f"{n}: {d}")) for n, _, d in PROJECTS]
+    cards.append(a(f"{GH}?tab=repositories", pic("more", "all repositories")))
+    rows = [
+        row(pic("hero", "bedeaf (0x00BEDEAF): linux systems & binary analysis", wide=True)),
+        row(pic("about", "Linux Systems & Binary Analysis. Computer Engineering. Reversing with "
+                         "radare2, Binary Ninja and more; tools in C/C++."),
+            pic("trace", "radare2 graph view tracing a tiny crackme")),
+        row(a("https://bedeaf.pages.dev/", pic("blog", "blog")),
+            a("https://crackmes.one/user/linkola", pic("crackmes", "crackmes.one"))),
+        row(pic("projects", "projects", wide=True)),
+        row(*cards),  # one flow: two per line on desktop, one on phones
+        row(pic("activity", "activity", wide=True)),
+        row(SNAKE),
+        row(f'<picture><source media="(prefers-color-scheme: dark)" srcset="{GRAPH_DARK}">'
+            f'<img src="{GRAPH_LIGHT}" width="100%" alt="activity graph"></picture>'),
+    ]
+    open("README.md", "w").write("\n\n".join(rows) + "\n")

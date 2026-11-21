@@ -44,7 +44,7 @@
 <rect x="840" y="248" width="19" height="32" fill="#ffffff30"><animate attributeName="height" values="32;13;32" dur="4.0s" repeatCount="indefinite"/><animate attributeName="y" values="248;267;248" dur="4.0s" repeatCount="indefinite"/></rect>
 <rect x="860" y="257" width="19" height="23" fill="#ffffff30"><animate attributeName="height" values="23;9;23" dur="4.5s" repeatCount="indefinite"/><animate attributeName="y" values="257;271;257" dur="4.5s" repeatCount="indefinite"/></rect>
 <rect x="880" y="264" width="19" height="16" fill="#ffffff20"><animate attributeName="height" values="16;6;16" dur="6.8s" repeatCount="indefinite"/><animate attributeName="y" values="264;274;264" dur="6.8s" repeatCount="indefinite"/></rect>
-<text x="450.0" y="62" font-size="14" fill="#ffffff60" text-anchor="middle" opacity="0">mov <tspan fill="#ffffffa0">eax</tspan>, <tspan fill="#ffffffcf">0x00BEDEAF</tspan><animate attributeName="opacity" from="0" to="1" begin="0.1s" dur="0.6s" fill="freeze"/></text>
+<text x="450.0" y="58" font-size="20" fill="#ffffff60" text-anchor="middle" opacity="0">mov <tspan fill="#ffffffa0">eax</tspan>, <tspan fill="#ffffffcf">0x00BEDEAF</tspan><animate attributeName="opacity" from="0" to="1" begin="0.1s" dur="0.6s" fill="freeze"/></text>
 <text x="298.8" y="148" font-size="84" font-weight="700" fill="#ffffff60" visibility="hidden">7<set attributeName="visibility" to="visible" begin="0.60s" dur="0.07s"/></text>
 <text x="298.8" y="148" font-size="84" font-weight="700" fill="#ffffff60" visibility="hidden">E<set attributeName="visibility" to="visible" begin="0.67s" dur="0.07s"/></text>
 <text x="298.8" y="148" font-size="84" font-weight="700" fill="#ffffff60" visibility="hidden">9<set attributeName="visibility" to="visible" begin="0.74s" dur="0.07s"/></text>
@@ -94,12 +94,12 @@
 <text x="550.8" y="148" font-size="84" font-weight="700" fill="#ffffff60" visibility="hidden">D<set attributeName="visibility" to="visible" begin="1.92s" dur="0.07s"/></text>
 <text x="550.8" y="148" font-size="84" font-weight="700" fill="#ffffffcf" visibility="hidden">F<set attributeName="visibility" to="visible" begin="1.99s" fill="freeze"/></text>
 <rect x="299" y="172" width="0" height="2" fill="#ffffffa0"><animate attributeName="width" from="0" to="302" begin="2.18s" dur="0.8s" fill="freeze"/></rect>
-<text x="349" y="206" font-size="16" fill="#ffffff60" opacity="0">[rsp]<animate attributeName="opacity" from="0" to="1" begin="2.98s" dur="0.3s" fill="freeze"/></text>
-<text x="415" y="206" font-size="18" fill="#ffffffcf" opacity="0">af<set attributeName="opacity" to="1" begin="3.18s" fill="freeze"/></text>
-<text x="453" y="206" font-size="18" fill="#ffffffcf" opacity="0">de<set attributeName="opacity" to="1" begin="3.40s" fill="freeze"/></text>
-<text x="491" y="206" font-size="18" fill="#ffffffcf" opacity="0">be<set attributeName="opacity" to="1" begin="3.62s" fill="freeze"/></text>
-<text x="529" y="206" font-size="18" fill="#ffffffa0" opacity="0">00<set attributeName="opacity" to="1" begin="3.84s" fill="freeze"/></text>
-<text x="450.0" y="240" font-size="13" letter-spacing="3" fill="#ffffffa0" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS<animate attributeName="opacity" from="0" to="1" begin="4.26s" dur="1s" fill="freeze"/></text>
+<text x="319" y="210" font-size="22" fill="#ffffff60" opacity="0">[rsp]<animate attributeName="opacity" from="0" to="1" begin="2.98s" dur="0.3s" fill="freeze"/></text>
+<text x="405" y="210" font-size="26" fill="#ffffffcf" opacity="0">af<set attributeName="opacity" to="1" begin="3.18s" fill="freeze"/></text>
+<text x="453" y="210" font-size="26" fill="#ffffffcf" opacity="0">de<set attributeName="opacity" to="1" begin="3.40s" fill="freeze"/></text>
+<text x="501" y="210" font-size="26" fill="#ffffffcf" opacity="0">be<set attributeName="opacity" to="1" begin="3.62s" fill="freeze"/></text>
+<text x="549" y="210" font-size="26" fill="#ffffffa0" opacity="0">00<set attributeName="opacity" to="1" begin="3.84s" fill="freeze"/></text>
+<text x="450.0" y="244" font-size="18" letter-spacing="3" fill="#ffffffa0" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS<animate attributeName="opacity" from="0" to="1" begin="4.26s" dur="1s" fill="freeze"/></text>
 <defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".06"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
 <rect x="-260" width="260" height="280" fill="url(#sw)"><animate attributeName="x" from="-260" to="900" dur="8s" begin="4.06s" repeatCount="indefinite"/></rect>
 <rect x=".5" y=".5" width="899" height="279" fill="none" stroke="#ffffff20"/>
