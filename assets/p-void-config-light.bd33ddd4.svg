@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="404" height="110" viewBox="0 0 404 110" font-family="'Liberation Mono',Menlo,Consolas,monospace">
-<style>.u{animation:u 5s ease-in-out 2.4s infinite}@keyframes u{0%,60%{width:0}75%,90%{width:112px}100%{width:0}}</style>
-<rect x="4.5" y="4.5" width="395" height="101" fill="none" stroke="#e3e3e3"/>
-<text x="24" y="36" font-size="13" fill="#8d8d8d">04</text><text x="58" y="36" font-size="17" font-weight="700" fill="#2f2f2f">void-config</text><rect x="328" y="20" width="52" height="22" fill="#e3e3e3"/><text x="354" y="35.5" font-size="12" fill="#6b6b6b" text-anchor="middle">sh</text><rect class="u" x="58" y="44" width="0" height="2" fill="#505050"/><text x="24" y="68" font-size="13" fill="#505050">void on a ThinkPad: runit, ZFS, nftables,</text><text x="24" y="87" font-size="13" fill="#505050">measured</text>
-</svg>

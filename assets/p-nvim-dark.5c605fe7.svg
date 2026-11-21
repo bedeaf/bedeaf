@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="404" height="110" viewBox="0 0 404 110" font-family="'Liberation Mono',Menlo,Consolas,monospace">
-<style>.u{animation:u 5s ease-in-out 3.0s infinite}@keyframes u{0%,60%{width:0}75%,90%{width:41px}100%{width:0}}</style>
-<rect x="4.5" y="4.5" width="395" height="101" fill="none" stroke="#ffffff20"/>
-<text x="24" y="36" font-size="13" fill="#ffffff60">05</text><text x="58" y="36" font-size="17" font-weight="700" fill="#ffffffcf">nvim</text><rect x="328" y="20" width="52" height="22" fill="#ffffff20"/><text x="354" y="35.5" font-size="12" fill="#ffffff80" text-anchor="middle">Lua</text><rect class="u" x="58" y="44" width="0" height="2" fill="#ffffffa0"/><text x="24" y="68" font-size="13" fill="#ffffffa0">LazyVim: project-aware builds, debugging,</text><text x="24" y="87" font-size="13" fill="#ffffffa0">monochrome</text>
-</svg>

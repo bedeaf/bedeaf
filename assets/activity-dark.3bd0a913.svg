@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="700" height="52" viewBox="0 0 700 52" font-family="'Liberation Mono',Menlo,Consolas,monospace">
-<style></style>
-<rect x="0.5" y="0.5" width="699" height="51" fill="none" stroke="#ffffff20"/>
-<text x="26" y="34" font-size="22" fill="#ffffff60">$ <tspan fill="#ffffffcf">git log --graph</tspan></text><text x="674" y="33" font-size="18" fill="#ffffff60" text-anchor="end">updated every 12h</text>
-</svg>

@@ -11,15 +11,14 @@ from theme import recolor
 
 FONT = "'Liberation Mono',Menlo,Consolas,monospace"
 W = 900
-FG, DIM, MID, HI, EDGE = "#a0a0a0", "#606060", "#808080", "#cfcfcf", "#202020"
+FG, DIM, MID, HI, EDGE = "#a0a0a0", "#707070", "#8f8f8f", "#cfcfcf", "#202020"
 
 
 def panel(h, body, extra_style="", w=W, inset=0):
-    # inset: cards draw their frame 4px in, so neighbours keep a gap both
-    # side by side (desktop) and stacked (phone)
+    # Frameless: pieces sit straight on the page like terminal output. inset is
+    # kept for call compatibility; spacing comes from each panel's padding.
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'font-family="{FONT}">\n<style>{extra_style}</style>\n'
-            f'<rect x="{inset+.5}" y="{inset+.5}" width="{w-1-2*inset}" height="{h-1-2*inset}" fill="none" stroke="{EDGE}"/>\n'
             f'{body}\n</svg>\n')
 
 
@@ -218,16 +217,16 @@ def chip_flow(x0, y0, groups, right):
     """Chips that wrap inside [x0, right]; groups: (labels, fill, color, gap_before)."""
     out, x, y = [], x0, y0
     for labels, fill, color, gap in groups:
-        if x > x0:
-            x += gap
+        if x > x0:  # every group starts its own line
+            x, y = x0, y + 33
         for label in labels:
-            w = len(label) * 7.8 + 18
+            w = len(label) * 8.4 + 16
             if x > x0 and x + w > right:
-                x, y = x0, y + 30
-            out.append(f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="24" fill="{fill}"/>'
-                       f'<text x="{x+9:.0f}" y="{y+16.5}" font-size="13" fill="{color}">{esc(label)}</text>')
+                x, y = x0, y + 33
+            out.append(f'<rect x="{x:.0f}" y="{y}" width="{w:.0f}" height="26" fill="{fill}"/>'
+                       f'<text x="{x+8:.0f}" y="{y+18}" font-size="14" fill="{color}">{esc(label)}</text>')
             x += w + 6
-    return "".join(out), y + 24
+    return "".join(out), y + 26
 
 
 ABOUT = ("I live in a terminal on Void Linux: runit, ZFS, a patched dwm and a monochrome "
@@ -237,20 +236,20 @@ ABOUT = ("I live in a terminal on Void Linux: runit, ZFS, a patched dwm and a mo
 
 def about_cards():
     import textwrap
-    b = [f'<text x="{PAD}" y="40" font-size="13" fill="{DIM}">$ cat ~/about</text>',
-         f'<text x="{PAD}" y="78" font-size="26" font-weight="700" fill="{HI}">Linux Systems &amp;</text>',
-         f'<text x="{PAD}" y="110" font-size="26" font-weight="700" fill="{HI}">Binary Analysis</text>',
-         f'<text x="{PAD}" y="140" font-size="14" fill="{MID}">Computer Engineering</text>']
-    y = 176
-    for line in textwrap.wrap(ABOUT, 41):
-        b.append(f'<text x="{PAD}" y="{y}" font-size="14" fill="{FG}">{esc(line)}</text>')
-        y += 21
-    chips, cy = chip_flow(PAD, y + 4, [
+    b = [f'<text x="{PAD}" y="42" font-size="15" fill="{DIM}">$ cat ~/about</text>',
+         f'<text x="{PAD}" y="82" font-size="28" font-weight="700" fill="{HI}">Linux Systems &amp;</text>',
+         f'<text x="{PAD}" y="116" font-size="28" font-weight="700" fill="{HI}">Binary Analysis</text>',
+         f'<text x="{PAD}" y="148" font-size="16" fill="{MID}">Computer Engineering</text>']
+    y = 188
+    for line in textwrap.wrap(ABOUT, 37):
+        b.append(f'<text x="{PAD}" y="{y}" font-size="16" fill="{FG}">{esc(line)}</text>')
+        y += 24
+    chips, cy = chip_flow(PAD, y + 2, [
         (["void", "runit", "zfs", "dwm", "neovim", "urxvt"], "#202020", FG, 0),
         (["C", "C++", "Go", "Lua"], "#404040", HI, 14),
-        (["reversing:", "radare2", "binary ninja", "more"], "#171717", FG, 14)], TW - PAD)
+        (["reversing:", "radare2", "binary ninja"], "#171717", FG, 14)], TW - PAD)
     # the r2 graph, drawn in its own coordinates and scaled into the card
-    s, lx, ly = 1.3, 127, 24                  # extents ~[0, 265] x [0, 306] before scaling
+    s, lx, ly = 1.42, 127, 24                 # extents ~[0, 265] x [0, 306] before scaling
     graph, gb = cfg(ox=0, cx=lx, oy=ly)
     gw = 265 * s
     tx = (TW - gw) / 2
@@ -260,31 +259,32 @@ def about_cards():
 
 
 def strip(label, right=""):
-    """Full-width section header. Drawn 700 wide so it scales ~1.2x on desktop
-    and ~0.47x on phones, where 22px type still lands near 10px."""
-    w = 700
+    """Full-width section header. Drawn 640 wide so it scales ~1.3x on desktop
+    and ~0.5x on phones, where 22px type still lands near 11px."""
+    w = 640
     body = (f'<text x="26" y="34" font-size="22" fill="{DIM}">$ <tspan fill="{HI}">{esc(label)}</tspan></text>'
-            f'<text x="{w-26}" y="33" font-size="18" fill="{DIM}" text-anchor="end">{esc(right)}</text>')
+            f'<text x="{w-26}" y="33" font-size="18" fill="{DIM}" text-anchor="end">{esc(right)}</text>'
+            f'<rect x="26" y="47" width="{w-52}" height="1" fill="{EDGE}"/>')
     return panel(52, body, w=w)
 
 
 def project(num, name, lang, desc, delay):
     import textwrap
-    body = [f'<text x="{PAD}" y="36" font-size="13" fill="{DIM}">{esc(num)}</text>',
-            f'<text x="{PAD+34}" y="36" font-size="17" font-weight="700" fill="{HI}">{esc(name)}</text>',
-            f'<rect x="{TW-PAD-52}" y="20" width="52" height="22" fill="#202020"/>',
-            f'<text x="{TW-PAD-26}" y="35.5" font-size="12" fill="{MID}" text-anchor="middle">{esc(lang)}</text>',
-            f'<rect class="u" x="{PAD+34}" y="44" width="0" height="2" fill="{FG}"/>']
-    for k, line in enumerate(textwrap.wrap(desc, 44)[:2]):
-        body.append(f'<text x="{PAD}" y="{68 + k * 19}" font-size="13" fill="{FG}">{esc(line)}</text>')
+    body = [f'<text x="{PAD}" y="38" font-size="15" fill="{DIM}">{esc(num)}</text>',
+            f'<text x="{PAD+38}" y="38" font-size="19" font-weight="700" fill="{HI}">{esc(name)}</text>',
+            f'<rect x="{TW-PAD-58}" y="20" width="58" height="25" fill="#202020"/>',
+            f'<text x="{TW-PAD-29}" y="37.5" font-size="14" fill="{MID}" text-anchor="middle">{esc(lang)}</text>',
+            f'<rect class="u" x="{PAD+38}" y="47" width="0" height="2" fill="{FG}"/>']
+    for k, line in enumerate(textwrap.wrap(desc, 38)[:2]):
+        body.append(f'<text x="{PAD}" y="{76 + k * 22}" font-size="15" fill="{FG}">{esc(line)}</text>')
     css = (".u{animation:u 5s ease-in-out %.1fs infinite}"
-           "@keyframes u{0%%,60%%{width:0}75%%,90%%{width:%dpx}100%%{width:0}}" % (delay, round(len(name) * 10.2)))
-    return panel(110, "".join(body), css, w=TW, inset=4)
+           "@keyframes u{0%%,60%%{width:0}75%%,90%%{width:%dpx}100%%{width:0}}" % (delay, round(len(name) * 11.4)))
+    return panel(122, "".join(body), css, w=TW, inset=4)
 
 
 def link(label, sub):
-    body = (f'<text x="{PAD}" y="32" font-size="15" fill="{HI}">{esc(label)}</text>'
-            f'<text x="{TW-PAD}" y="32" font-size="13" fill="{DIM}" text-anchor="end">{esc(sub)} →</text>')
+    body = (f'<text x="{PAD}" y="32" font-size="17" fill="{HI}">{esc(label)}</text>'
+            f'<text x="{TW-PAD}" y="32" font-size="15" fill="{DIM}" text-anchor="end">{esc(sub)} →</text>')
     return panel(52, body, w=TW, inset=4)
 
 
@@ -307,7 +307,7 @@ def header():
                  f'<animate attributeName="height" values="{h};{h*0.4:.0f};{h}" dur="{d:.1f}s" repeatCount="indefinite"/>'
                  f'<animate attributeName="y" values="{H-h};{H-h*0.4:.0f};{H-h}" dur="{d:.1f}s" repeatCount="indefinite"/></rect>')
     # the instruction that loads the name, shown first
-    o.append(f'<text x="{W/2}" y="58" font-size="20" fill="{DIM}" text-anchor="middle" opacity="0">'
+    o.append(f'<text x="{W/2}" y="58" font-size="24" fill="{DIM}" text-anchor="middle" opacity="0">'
              f'mov <tspan fill="{FG}">eax</tspan>, <tspan fill="{HI}">0x00BEDEAF</tspan>'
              f'<animate attributeName="opacity" from="0" to="1" begin="0.1s" dur="0.6s" fill="freeze"/></text>')
     # decode-style name: each letter cycles through hex digits, then settles
@@ -324,21 +324,20 @@ def header():
     end = 0.6 + len(name) * 0.18 + 0.5
     # rule, then the dword as it lands in memory (little-endian), byte by byte
     o.append(f'<rect x="{x0:.0f}" y="172" width="0" height="2" fill="{FG}"><animate attributeName="width" from="0" to="{len(name)*cw:.0f}" begin="{end:.2f}s" dur="0.8s" fill="freeze"/></rect>')
-    gx = W / 2 - 131  # "[rsp]" + gap + four bytes, centred as one group
-    o.append(f'<text x="{gx:.0f}" y="210" font-size="22" fill="{DIM}" opacity="0">[rsp]'
+    gx = W / 2 - 138  # "[rsp]" + gap + four bytes, centred as one group
+    o.append(f'<text x="{gx:.0f}" y="212" font-size="24" fill="{DIM}" opacity="0">[rsp]'
              f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.8:.2f}s" dur="0.3s" fill="freeze"/></text>')
     for k, byte in enumerate(["af", "de", "be", "00"]):
-        bx = gx + 86 + k * 48
-        o.append(f'<text x="{bx:.0f}" y="210" font-size="26" fill="{HI if byte != "00" else FG}" opacity="0">{byte}'
+        bx = gx + 92 + k * 50
+        o.append(f'<text x="{bx:.0f}" y="212" font-size="28" fill="{HI if byte != "00" else FG}" opacity="0">{byte}'
                  f'<set attributeName="opacity" to="1" begin="{end+1.0+k*0.22:.2f}s" fill="freeze"/></text>')
     end += 1.0 + 4 * 0.22
-    o.append(f'<text x="{W/2}" y="244" font-size="18" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
+    o.append(f'<text x="{W/2}" y="246" font-size="20" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
              f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.2:.2f}s" dur="1s" fill="freeze"/></text>')
     # slow light sweep, like the hard light on the wallpaper
     o.append('<defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
              '<stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>')
     o.append(f'<rect x="-260" width="260" height="{H}" fill="url(#sw)"><animate attributeName="x" from="-260" to="{W}" dur="8s" begin="{end:.2f}s" repeatCount="indefinite"/></rect>')
-    o.append(f'<rect x=".5" y=".5" width="{W-1}" height="{H-1}" fill="none" stroke="{EDGE}"/>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">\n'
             + "\n".join(o) + "\n</svg>\n")
 
