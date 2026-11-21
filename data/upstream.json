@@ -1,0 +1,58 @@
+[
+ {
+  "repo": "radareorg/r2ghidra",
+  "number": 312,
+  "title": "Stop leaking cloned annotations in ParseNode",
+  "url": "https://github.com/radareorg/r2ghidra/pull/312",
+  "merged": "2026-11-21T07:19:41Z",
+  "opened": "2026-11-20T21:16:51Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27557,
+  "title": "Print align instead of unk for the stack alignment stackop",
+  "url": "https://github.com/radareorg/radare2/pull/27557",
+  "merged": "2026-11-21T06:07:57Z",
+  "opened": "2026-11-20T20:45:38Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27518,
+  "title": "Color the variables and arguments in the decompiler output",
+  "url": "https://github.com/radareorg/radare2/pull/27518",
+  "merged": "2026-11-19T11:31:33Z",
+  "opened": "2026-11-19T11:02:48Z"
+ },
+ {
+  "repo": "yshui/picom",
+  "number": 1561,
+  "title": "man: document that --backend has no default",
+  "url": "https://github.com/yshui/picom/pull/1561",
+  "merged": null,
+  "opened": "2026-11-20T21:24:01Z"
+ },
+ {
+  "repo": "yshui/picom",
+  "number": 1560,
+  "title": "config: don't quote the boolean in the vsync error message",
+  "url": "https://github.com/yshui/picom/pull/1560",
+  "merged": null,
+  "opened": "2026-11-20T21:20:11Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27558,
+  "title": "Print Cr metadata as a replayable command in C*",
+  "url": "https://github.com/radareorg/radare2/pull/27558",
+  "merged": null,
+  "opened": "2026-11-20T20:54:12Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27519,
+  "title": "Update the style check command in CONTRIBUTING.md",
+  "url": "https://github.com/radareorg/radare2/pull/27519",
+  "merged": null,
+  "opened": "2026-11-19T11:22:08Z"
+ }
+]

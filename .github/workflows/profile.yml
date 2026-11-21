@@ -1,0 +1,23 @@
+name: profile
+# Regenerate the panels so the upstream pull request section follows GitHub.
+# Commits only when something changed; pushes made with GITHUB_TOKEN do not
+# trigger other workflows, so this never loops.
+on:
+  schedule: [{cron: "41 */6 * * *"}]
+  workflow_dispatch:
+permissions: {contents: write}
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/gen.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: commit if changed
+        run: |
+          git add -A README.md assets data
+          git diff --cached --quiet && exit 0
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -q -m "Refresh upstream pull requests"
+          git push

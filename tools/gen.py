@@ -311,6 +311,44 @@ def header():
             + "\n".join(o) + "\n</svg>\n")
 
 
+def upstream_prs():
+    """Pull requests bedeaf opened in other people's repositories, through `gh`
+    (GH_TOKEN in CI). On failure the last good copy in data/upstream.json is
+    used, so a run without network never drops the section."""
+    import json, os, re, subprocess
+    path = "data/upstream.json"
+    try:
+        res = subprocess.run(["gh", "api", "-X", "GET", "search/issues", "-f",
+                              "q=author:bedeaf type:pr -user:bedeaf", "-f", "per_page=100"],
+                             capture_output=True, text=True, timeout=60, check=True)
+        prs = []
+        for it in json.loads(res.stdout)["items"]:
+            merged = (it.get("pull_request") or {}).get("merged_at")
+            if it["state"] != "open" and not merged:
+                continue                      # closed without merge: not shown
+            title = re.sub(r"\s*##[\w-]+\s*$", "", it["title"])   # radare2 changelog tag
+            prs.append({"repo": "/".join(it["repository_url"].split("/")[-2:]), "number": it["number"],
+                        "title": title, "url": it["html_url"], "merged": merged, "opened": it["created_at"]})
+        prs.sort(key=lambda p: (p["merged"] is None, -int(re.sub(r"\D", "", p["merged"] or p["opened"]))))
+        os.makedirs("data", exist_ok=True)
+        open(path, "w").write(json.dumps(prs, indent=1) + "\n")
+    except Exception as e:
+        print(f"warning: GitHub fetch failed ({e}); using {path}")
+        prs = json.load(open(path))
+    return prs
+
+
+def pr_card(p):
+    import textwrap
+    state = "merged" if p["merged"] else "open"
+    body = [f'<text x="{PAD}" y="36" font-size="16" font-weight="700" fill="{HI}">{esc(p["repo"])}</text>',
+            f'<text x="{TW-PAD}" y="36" font-size="15" text-anchor="end" fill="{DIM}">#{p["number"]} · '
+            f'<tspan fill="{HI if p["merged"] else DIM}">{state}</tspan></text>']
+    for k, line in enumerate(textwrap.wrap(p["title"], 39)[:2]):
+        body.append(f'<text x="{PAD}" y="{64 + k * 22}" font-size="15" fill="{FG}">{esc(line)}</text>')
+    return panel(104, "".join(body), w=TW)
+
+
 PROJECTS = [
     ("gom", "C", "native Linux games, isolated: bwrap · landlock · seccomp"),
     ("ppwm", "C++", "patchable C++20 X11 wm: autotiling, bar, XEmbed tray"),
@@ -333,6 +371,11 @@ if __name__ == "__main__":
            "activity": strip("git log --graph", "updated every 12h")}
     for i, (n, l, d) in enumerate(PROJECTS, 1):
         out[f"p-{n}"] = project(f"{i:02d}", n, l, d, i * 0.6)
+    prs = upstream_prs()
+    merged = sum(1 for p in prs if p["merged"])
+    out["upstream"] = strip("git log upstream", f"{merged} merged · {len(prs) - merged} open")
+    for p in prs:
+        out[f"pr-{p['repo'].split('/')[1]}-{p['number']}"] = pr_card(p)
 
     # Content-hashed names: raw.githubusercontent caches for 5 min and browsers
     # keep stale copies longer, so every change must get a fresh URL.
@@ -369,6 +412,10 @@ if __name__ == "__main__":
             a("https://crackmes.one/user/linkola", pic("crackmes", "crackmes.one"))),
         row(pic("projects", "projects", wide=True)),
         row(*cards, left=True),  # one flow: two per line on desktop, one on phones; odd one stays in column
+        row(pic("upstream", "pull requests to other projects", wide=True)),
+        row(*[a(p["url"], pic(f"pr-{p['repo'].split('/')[1]}-{p['number']}",
+                              f"{p['repo']}#{p['number']} ({'merged' if p['merged'] else 'open'}): {p['title']}"))
+              for p in prs], left=True),
         row(pic("activity", "activity", wide=True)),
         row(SNAKE),
     ]
