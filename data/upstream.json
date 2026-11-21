@@ -1,5 +1,13 @@
 [
  {
+  "repo": "radareorg/radare2",
+  "number": 27573,
+  "title": "Remove four config keys that nothing reads",
+  "url": "https://github.com/radareorg/radare2/pull/27573",
+  "merged": "2026-11-21T18:26:59Z",
+  "opened": "2026-11-21T18:15:09Z"
+ },
+ {
   "repo": "radareorg/r2ghidra",
   "number": 312,
   "title": "Stop leaking cloned annotations in ParseNode",
@@ -22,6 +30,30 @@
   "url": "https://github.com/radareorg/radare2/pull/27518",
   "merged": "2026-11-19T11:31:33Z",
   "opened": "2026-11-19T11:02:48Z"
+ },
+ {
+  "repo": "radareorg/iaito",
+  "number": 321,
+  "title": "Free codemeta items after adding them to RCodeMeta",
+  "url": "https://github.com/radareorg/iaito/pull/321",
+  "merged": null,
+  "opened": "2026-11-21T18:36:37Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27572,
+  "title": "Make panels G ignore an empty or non-numeric scr.highlight",
+  "url": "https://github.com/radareorg/radare2/pull/27572",
+  "merged": null,
+  "opened": "2026-11-21T18:15:01Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27571,
+  "title": "Use http.authtok when http.authfile is not set",
+  "url": "https://github.com/radareorg/radare2/pull/27571",
+  "merged": null,
+  "opened": "2026-11-21T18:04:33Z"
  },
  {
   "repo": "yshui/picom",
