@@ -1,6 +1,14 @@
 [
  {
   "repo": "radareorg/radare2",
+  "number": 27575,
+  "title": "debug reason cond",
+  "url": "https://github.com/radareorg/radare2/pull/27575",
+  "merged": "2026-11-21T18:54:26Z",
+  "opened": "2026-11-21T18:52:15Z"
+ },
+ {
+  "repo": "radareorg/radare2",
   "number": 27573,
   "title": "Remove four config keys that nothing reads",
   "url": "https://github.com/radareorg/radare2/pull/27573",
@@ -30,6 +38,30 @@
   "url": "https://github.com/radareorg/radare2/pull/27518",
   "merged": "2026-11-19T11:31:33Z",
   "opened": "2026-11-19T11:02:48Z"
+ },
+ {
+  "repo": "mpv-player/mpv",
+  "number": 18874,
+  "title": "demux_edl: remove stray quote from two error messages",
+  "url": "https://github.com/mpv-player/mpv/pull/18874",
+  "merged": null,
+  "opened": "2026-11-21T19:16:35Z"
+ },
+ {
+  "repo": "radareorg/sdb",
+  "number": 337,
+  "title": "Free the key list in mirror_sdb",
+  "url": "https://github.com/radareorg/sdb/pull/337",
+  "merged": null,
+  "opened": "2026-11-21T19:00:57Z"
+ },
+ {
+  "repo": "radareorg/radare2",
+  "number": 27574,
+  "title": "graph scroll speed",
+  "url": "https://github.com/radareorg/radare2/pull/27574",
+  "merged": null,
+  "opened": "2026-11-21T18:48:20Z"
  },
  {
   "repo": "radareorg/iaito",
