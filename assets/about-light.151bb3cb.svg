@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="404" height="475" viewBox="0 0 404 475" font-family="'Liberation Mono',Menlo,Consolas,monospace">
+<style></style>
+<text x="24" y="42" font-size="15" fill="#7b7b7b">$ cat ~/about</text>
+<text x="24" y="80" font-size="26" font-weight="700" fill="#2f2f2f">Linux Systems &amp;</text>
+<text x="24" y="112" font-size="26" font-weight="700" fill="#2f2f2f">Binary Analysis</text>
+<text x="24" y="142" font-size="15" fill="#5e5e5e">Computer Engineering</text>
+<text x="24" y="180" font-size="15" fill="#505050">I live in a terminal on Void Linux:</text>
+<text x="24" y="203" font-size="15" fill="#505050">runit, ZFS, a patched dwm and a</text>
+<text x="24" y="226" font-size="15" fill="#505050">monochrome LazyVim. Mostly I take</text>
+<text x="24" y="249" font-size="15" fill="#505050">binaries apart: crackmes, stripped</text>
+<text x="24" y="272" font-size="15" fill="#505050">ELFs, anything that ships without</text>
+<text x="24" y="295" font-size="15" fill="#505050">source. The tools I need, I write in</text>
+<text x="24" y="318" font-size="15" fill="#505050">C/C++.</text>
+<text x="24" y="355" font-size="15" fill="#7b7b7b">void · runit · zfs · dwm · neovim</text>
+<text x="24" y="378" font-size="15" fill="#7b7b7b">C · C++ · Go · Lua</text>
+<text x="24" y="401" font-size="15" fill="#7b7b7b">radare2 · binary ninja</text>
+</svg>

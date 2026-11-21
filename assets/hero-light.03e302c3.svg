@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="200" viewBox="0 0 900 200" font-family="'Liberation Mono',Menlo,Consolas,monospace">
+<text x="450.0" y="44" font-size="22" fill="#7b7b7b" text-anchor="middle">mov <tspan fill="#505050">eax</tspan>, <tspan fill="#2f2f2f">0x00BEDEAF</tspan></text>
+<text x="298.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">7<set attributeName="visibility" to="visible" begin="0.30s" dur="0.07s"/></text>
+<text x="298.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">E<set attributeName="visibility" to="visible" begin="0.37s" dur="0.07s"/></text>
+<text x="298.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">8<set attributeName="visibility" to="visible" begin="0.44s" dur="0.07s"/></text>
+<text x="298.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">E<set attributeName="visibility" to="visible" begin="0.51s" dur="0.07s"/></text>
+<text x="298.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">F<set attributeName="visibility" to="visible" begin="0.58s" dur="0.07s"/></text>
+<text x="298.8" y="124" font-size="84" font-weight="700" fill="#2f2f2f" visibility="hidden">B<set attributeName="visibility" to="visible" begin="0.65s" fill="freeze"/></text>
+<text x="349.2" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">C<set attributeName="visibility" to="visible" begin="0.42s" dur="0.07s"/></text>
+<text x="349.2" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">7<set attributeName="visibility" to="visible" begin="0.49s" dur="0.07s"/></text>
+<text x="349.2" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">7<set attributeName="visibility" to="visible" begin="0.56s" dur="0.07s"/></text>
+<text x="349.2" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">8<set attributeName="visibility" to="visible" begin="0.63s" dur="0.07s"/></text>
+<text x="349.2" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">D<set attributeName="visibility" to="visible" begin="0.70s" dur="0.07s"/></text>
+<text x="349.2" y="124" font-size="84" font-weight="700" fill="#2f2f2f" visibility="hidden">E<set attributeName="visibility" to="visible" begin="0.77s" fill="freeze"/></text>
+<text x="399.6" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">9<set attributeName="visibility" to="visible" begin="0.54s" dur="0.07s"/></text>
+<text x="399.6" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">3<set attributeName="visibility" to="visible" begin="0.61s" dur="0.07s"/></text>
+<text x="399.6" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">2<set attributeName="visibility" to="visible" begin="0.68s" dur="0.07s"/></text>
+<text x="399.6" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">C<set attributeName="visibility" to="visible" begin="0.75s" dur="0.07s"/></text>
+<text x="399.6" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">8<set attributeName="visibility" to="visible" begin="0.82s" dur="0.07s"/></text>
+<text x="399.6" y="124" font-size="84" font-weight="700" fill="#2f2f2f" visibility="hidden">D<set attributeName="visibility" to="visible" begin="0.89s" fill="freeze"/></text>
+<text x="450.0" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">7<set attributeName="visibility" to="visible" begin="0.66s" dur="0.07s"/></text>
+<text x="450.0" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">A<set attributeName="visibility" to="visible" begin="0.73s" dur="0.07s"/></text>
+<text x="450.0" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">9<set attributeName="visibility" to="visible" begin="0.80s" dur="0.07s"/></text>
+<text x="450.0" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">C<set attributeName="visibility" to="visible" begin="0.87s" dur="0.07s"/></text>
+<text x="450.0" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">2<set attributeName="visibility" to="visible" begin="0.94s" dur="0.07s"/></text>
+<text x="450.0" y="124" font-size="84" font-weight="700" fill="#2f2f2f" visibility="hidden">E<set attributeName="visibility" to="visible" begin="1.01s" fill="freeze"/></text>
+<text x="500.4" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">1<set attributeName="visibility" to="visible" begin="0.78s" dur="0.07s"/></text>
+<text x="500.4" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">7<set attributeName="visibility" to="visible" begin="0.85s" dur="0.07s"/></text>
+<text x="500.4" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">4<set attributeName="visibility" to="visible" begin="0.92s" dur="0.07s"/></text>
+<text x="500.4" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">2<set attributeName="visibility" to="visible" begin="0.99s" dur="0.07s"/></text>
+<text x="500.4" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">1<set attributeName="visibility" to="visible" begin="1.06s" dur="0.07s"/></text>
+<text x="500.4" y="124" font-size="84" font-weight="700" fill="#2f2f2f" visibility="hidden">A<set attributeName="visibility" to="visible" begin="1.13s" fill="freeze"/></text>
+<text x="550.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">8<set attributeName="visibility" to="visible" begin="0.90s" dur="0.07s"/></text>
+<text x="550.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">C<set attributeName="visibility" to="visible" begin="0.97s" dur="0.07s"/></text>
+<text x="550.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">E<set attributeName="visibility" to="visible" begin="1.04s" dur="0.07s"/></text>
+<text x="550.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">B<set attributeName="visibility" to="visible" begin="1.11s" dur="0.07s"/></text>
+<text x="550.8" y="124" font-size="84" font-weight="700" fill="#7b7b7b" visibility="hidden">A<set attributeName="visibility" to="visible" begin="1.18s" dur="0.07s"/></text>
+<text x="550.8" y="124" font-size="84" font-weight="700" fill="#2f2f2f" visibility="hidden">F<set attributeName="visibility" to="visible" begin="1.25s" fill="freeze"/></text>
+<rect x="299" y="146" width="302" height="1" fill="#e3e3e3"/>
+<text x="450.0" y="180" font-size="20" letter-spacing="3" fill="#505050" text-anchor="middle">LINUX SYSTEMS &amp; BINARY ANALYSIS</text>
+</svg>

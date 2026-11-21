@@ -237,17 +237,18 @@ ABOUT = ("I live in a terminal on Void Linux: runit, ZFS, a patched dwm and a mo
 def about_cards():
     import textwrap
     b = [f'<text x="{PAD}" y="42" font-size="15" fill="{DIM}">$ cat ~/about</text>',
-         f'<text x="{PAD}" y="82" font-size="28" font-weight="700" fill="{HI}">Linux Systems &amp;</text>',
-         f'<text x="{PAD}" y="116" font-size="28" font-weight="700" fill="{HI}">Binary Analysis</text>',
-         f'<text x="{PAD}" y="148" font-size="16" fill="{MID}">Computer Engineering</text>']
-    y = 188
-    for line in textwrap.wrap(ABOUT, 37):
-        b.append(f'<text x="{PAD}" y="{y}" font-size="16" fill="{FG}">{esc(line)}</text>')
-        y += 24
-    chips, cy = chip_flow(PAD, y + 2, [
-        (["void", "runit", "zfs", "dwm", "neovim", "urxvt"], "#202020", FG, 0),
-        (["C", "C++", "Go", "Lua"], "#404040", HI, 14),
-        (["reversing:", "radare2", "binary ninja"], "#171717", FG, 14)], TW - PAD)
+         f'<text x="{PAD}" y="80" font-size="26" font-weight="700" fill="{HI}">Linux Systems &amp;</text>',
+         f'<text x="{PAD}" y="112" font-size="26" font-weight="700" fill="{HI}">Binary Analysis</text>',
+         f'<text x="{PAD}" y="142" font-size="15" fill="{MID}">Computer Engineering</text>']
+    y = 180
+    for line in textwrap.wrap(ABOUT, 39):
+        b.append(f'<text x="{PAD}" y="{y}" font-size="15" fill="{FG}">{esc(line)}</text>')
+        y += 23
+    y += 14
+    for line in ("void · runit · zfs · dwm · neovim", "C · C++ · Go · Lua", "radare2 · binary ninja"):
+        b.append(f'<text x="{PAD}" y="{y}" font-size="15" fill="{DIM}">{esc(line)}</text>')
+        y += 23
+    chips, cy = "", y - 10
     # the r2 graph, drawn in its own coordinates and scaled into the card
     s, lx, ly = 1.42, 127, 24                 # extents ~[0, 265] x [0, 306] before scaling
     graph, gb = cfg(ox=0, cx=lx, oy=ly)
@@ -255,89 +256,57 @@ def about_cards():
     tx = (TW - gw) / 2
     h = int(max(cy + PAD, 20 + (gb + 4) * s + 20))
     g = f'<g transform="translate({tx:.1f},20) scale({s})">{graph}</g>'
-    return panel(h, "\n".join(b) + chips, w=TW, inset=4), panel(h, g, w=TW, inset=4)
+    return panel(h, "\n".join(b), w=TW), panel(h, g, w=TW)
 
 
 def strip(label, right=""):
     """Full-width section header. Drawn 640 wide so it scales ~1.3x on desktop
     and ~0.5x on phones, where 22px type still lands near 11px."""
     w = 640
-    body = (f'<text x="26" y="34" font-size="22" fill="{DIM}">$ <tspan fill="{HI}">{esc(label)}</tspan></text>'
-            f'<text x="{w-26}" y="33" font-size="18" fill="{DIM}" text-anchor="end">{esc(right)}</text>'
+    body = (f'<text x="26" y="34" font-size="20" fill="{DIM}">$ <tspan fill="{HI}">{esc(label)}</tspan></text>'
+            f'<text x="{w-26}" y="33" font-size="16" fill="{DIM}" text-anchor="end">{esc(right)}</text>'
             f'<rect x="26" y="47" width="{w-52}" height="1" fill="{EDGE}"/>')
     return panel(52, body, w=w)
 
 
 def project(num, name, lang, desc, delay):
     import textwrap
-    body = [f'<text x="{PAD}" y="38" font-size="15" fill="{DIM}">{esc(num)}</text>',
-            f'<text x="{PAD+38}" y="38" font-size="19" font-weight="700" fill="{HI}">{esc(name)}</text>',
-            f'<rect x="{TW-PAD-58}" y="20" width="58" height="25" fill="#202020"/>',
-            f'<text x="{TW-PAD-29}" y="37.5" font-size="14" fill="{MID}" text-anchor="middle">{esc(lang)}</text>',
-            f'<rect class="u" x="{PAD+38}" y="47" width="0" height="2" fill="{FG}"/>']
-    for k, line in enumerate(textwrap.wrap(desc, 38)[:2]):
-        body.append(f'<text x="{PAD}" y="{76 + k * 22}" font-size="15" fill="{FG}">{esc(line)}</text>')
-    css = (".u{animation:u 5s ease-in-out %.1fs infinite}"
-           "@keyframes u{0%%,60%%{width:0}75%%,90%%{width:%dpx}100%%{width:0}}" % (delay, round(len(name) * 11.4)))
-    return panel(122, "".join(body), css, w=TW, inset=4)
+    body = [f'<text x="{PAD}" y="36" font-size="15" fill="{DIM}">{esc(num)}</text>',
+            f'<text x="{PAD+36}" y="36" font-size="17" font-weight="700" fill="{HI}">{esc(name)}</text>',
+            f'<text x="{TW-PAD}" y="36" font-size="15" fill="{DIM}" text-anchor="end">{esc(lang)}</text>']
+    for k, line in enumerate(textwrap.wrap(desc, 39)[:2]):
+        body.append(f'<text x="{PAD}" y="{64 + k * 22}" font-size="15" fill="{FG}">{esc(line)}</text>')
+    return panel(104, "".join(body), w=TW)
 
 
 def link(label, sub):
     body = (f'<text x="{PAD}" y="32" font-size="17" fill="{HI}">{esc(label)}</text>'
             f'<text x="{TW-PAD}" y="32" font-size="15" fill="{DIM}" text-anchor="end">{esc(sub)} →</text>')
-    return panel(52, body, w=TW, inset=4)
+    return panel(52, body, w=TW)
 
 
 def header():
     import random
     random.seed(11)
-    H = 280
+    H = 200
     name = "BEDEAF"
     glyphs = "0123456789ABCDEF"  # the name is itself hex, so it decodes from hex digits
     fs, cw = 84, 50.4
     x0 = (W - len(name) * cw) / 2
-    o = []
-    # gray ramp columns (eyes.nvim ramp) breathing in the back
-    ramp = ["#0b0b0b", "#101010", "#171717", "#202020", "#303030"]
-    for i in range(45):
-        c = ramp[random.randrange(len(ramp))]
-        h = random.randint(12, 40)
-        d = random.uniform(3, 7)
-        o.append(f'<rect x="{i*20}" y="{H-h}" width="19" height="{h}" fill="{c}">'
-                 f'<animate attributeName="height" values="{h};{h*0.4:.0f};{h}" dur="{d:.1f}s" repeatCount="indefinite"/>'
-                 f'<animate attributeName="y" values="{H-h};{H-h*0.4:.0f};{H-h}" dur="{d:.1f}s" repeatCount="indefinite"/></rect>')
-    # the instruction that loads the name, shown first
-    o.append(f'<text x="{W/2}" y="58" font-size="24" fill="{DIM}" text-anchor="middle" opacity="0">'
-             f'mov <tspan fill="{FG}">eax</tspan>, <tspan fill="{HI}">0x00BEDEAF</tspan>'
-             f'<animate attributeName="opacity" from="0" to="1" begin="0.1s" dur="0.6s" fill="freeze"/></text>')
-    # decode-style name: each letter cycles through hex digits, then settles
+    o = [f'<text x="{W/2}" y="44" font-size="22" fill="{DIM}" text-anchor="middle">'
+         f'mov <tspan fill="{FG}">eax</tspan>, <tspan fill="{HI}">0x00BEDEAF</tspan></text>']
+    # decode-style name: each letter cycles through hex digits once, then settles
     for i, ch in enumerate(name):
         x = x0 + i * cw
-        start = 0.6 + i * 0.18
-        seq = [random.choice(glyphs.replace(ch, "")) for _ in range(7)]
-        for k, g in enumerate(seq):
-            t = start + k * 0.07
-            o.append(f'<text x="{x:.1f}" y="148" font-size="{fs}" font-weight="700" fill="{DIM}" visibility="hidden">{esc(g)}'
-                     f'<set attributeName="visibility" to="visible" begin="{t:.2f}s" dur="0.07s"/></text>')
-        o.append(f'<text x="{x:.1f}" y="148" font-size="{fs}" font-weight="700" fill="{HI}" visibility="hidden">{ch}'
-                 f'<set attributeName="visibility" to="visible" begin="{start+0.49:.2f}s" fill="freeze"/></text>')
-    end = 0.6 + len(name) * 0.18 + 0.5
-    # rule, then the dword as it lands in memory (little-endian), byte by byte
-    o.append(f'<rect x="{x0:.0f}" y="172" width="0" height="2" fill="{FG}"><animate attributeName="width" from="0" to="{len(name)*cw:.0f}" begin="{end:.2f}s" dur="0.8s" fill="freeze"/></rect>')
-    gx = W / 2 - 138  # "[rsp]" + gap + four bytes, centred as one group
-    o.append(f'<text x="{gx:.0f}" y="212" font-size="24" fill="{DIM}" opacity="0">[rsp]'
-             f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.8:.2f}s" dur="0.3s" fill="freeze"/></text>')
-    for k, byte in enumerate(["af", "de", "be", "00"]):
-        bx = gx + 92 + k * 50
-        o.append(f'<text x="{bx:.0f}" y="212" font-size="28" fill="{HI if byte != "00" else FG}" opacity="0">{byte}'
-                 f'<set attributeName="opacity" to="1" begin="{end+1.0+k*0.22:.2f}s" fill="freeze"/></text>')
-    end += 1.0 + 4 * 0.22
-    o.append(f'<text x="{W/2}" y="246" font-size="20" letter-spacing="3" fill="{FG}" text-anchor="middle" opacity="0">LINUX SYSTEMS &amp; BINARY ANALYSIS'
-             f'<animate attributeName="opacity" from="0" to="1" begin="{end+0.2:.2f}s" dur="1s" fill="freeze"/></text>')
-    # slow light sweep, like the hard light on the wallpaper
-    o.append('<defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
-             '<stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>')
-    o.append(f'<rect x="-260" width="260" height="{H}" fill="url(#sw)"><animate attributeName="x" from="-260" to="{W}" dur="8s" begin="{end:.2f}s" repeatCount="indefinite"/></rect>')
+        start = 0.3 + i * 0.12
+        for k, g in enumerate(random.choice(glyphs.replace(ch, "")) for _ in range(5)):
+            o.append(f'<text x="{x:.1f}" y="124" font-size="{fs}" font-weight="700" fill="{DIM}" visibility="hidden">{esc(g)}'
+                     f'<set attributeName="visibility" to="visible" begin="{start + k * 0.07:.2f}s" dur="0.07s"/></text>')
+        o.append(f'<text x="{x:.1f}" y="124" font-size="{fs}" font-weight="700" fill="{HI}" visibility="hidden">{ch}'
+                 f'<set attributeName="visibility" to="visible" begin="{start + 0.35:.2f}s" fill="freeze"/></text>')
+    o.append(f'<rect x="{x0:.0f}" y="146" width="{len(name)*cw:.0f}" height="1" fill="{EDGE}"/>')
+    o.append(f'<text x="{W/2}" y="180" font-size="20" letter-spacing="3" fill="{FG}" text-anchor="middle">'
+             'LINUX SYSTEMS &amp; BINARY ANALYSIS</text>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">\n'
             + "\n".join(o) + "\n</svg>\n")
 
@@ -361,8 +330,7 @@ if __name__ == "__main__":
     out = {"hero": header(), "about": about, "trace": trace,
            "blog": link("~/blog", "writeups"), "crackmes": link("~/crackmes", "linkola"),
            "projects": strip("ls ~/projects", f"{len(PROJECTS)} entries"),
-           "activity": strip("git log --graph", "updated every 12h"),
-           "more": project("··", "more", "all", "every repository, forks and upstream patches", 3.6)}
+           "activity": strip("git log --graph", "updated every 12h")}
     for i, (n, l, d) in enumerate(PROJECTS, 1):
         out[f"p-{n}"] = project(f"{i:02d}", n, l, d, i * 0.6)
 
@@ -388,11 +356,10 @@ if __name__ == "__main__":
     def a(href, inner):
         return f'<a href="{href}">{inner}</a>'
 
-    def row(*items):
-        return '<p align="center">' + " ".join(items) + "</p>"
+    def row(*items, left=False):
+        return ('<p>' if left else '<p align="center">') + " ".join(items) + "</p>"
 
     cards = [a(f"{GH}/{n}", pic(f"p-{n}", f"{n}: {d}")) for n, _, d in PROJECTS]
-    cards.append(a(f"{GH}?tab=repositories", pic("more", "all repositories")))
     rows = [
         row(pic("hero", "bedeaf (0x00BEDEAF): linux systems & binary analysis", wide=True)),
         row(pic("about", "Linux Systems & Binary Analysis. Computer Engineering. Reversing with "
@@ -401,10 +368,8 @@ if __name__ == "__main__":
         row(a("https://bedeaf.pages.dev/", pic("blog", "blog")),
             a("https://crackmes.one/user/linkola", pic("crackmes", "crackmes.one"))),
         row(pic("projects", "projects", wide=True)),
-        row(*cards),  # one flow: two per line on desktop, one on phones
+        row(*cards, left=True),  # one flow: two per line on desktop, one on phones; odd one stays in column
         row(pic("activity", "activity", wide=True)),
         row(SNAKE),
-        row(f'<picture><source media="(prefers-color-scheme: dark)" srcset="{GRAPH_DARK}">'
-            f'<img src="{GRAPH_LIGHT}" width="100%" alt="activity graph"></picture>'),
     ]
     open("README.md", "w").write("\n\n".join(rows) + "\n")
