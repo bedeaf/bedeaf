@@ -3,7 +3,7 @@ name: profile
 # Commits only when something changed; pushes made with GITHUB_TOKEN do not
 # trigger other workflows, so this never loops.
 on:
-  schedule: [{cron: "41 */6 * * *"}]
+  schedule: [{cron: "41 * * * *"}]  # hourly
   workflow_dispatch:
 permissions: {contents: write}
 jobs:
