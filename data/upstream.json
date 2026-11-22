@@ -1,5 +1,13 @@
 [
  {
+  "repo": "mpv-player/mpv",
+  "number": 18874,
+  "title": "demux_edl: remove stray quote from two error messages",
+  "url": "https://github.com/mpv-player/mpv/pull/18874",
+  "merged": "2026-11-22T08:24:44Z",
+  "opened": "2026-11-21T19:16:35Z"
+ },
+ {
   "repo": "radareorg/radare2",
   "number": 27575,
   "title": "debug reason cond",
@@ -38,14 +46,6 @@
   "url": "https://github.com/radareorg/radare2/pull/27518",
   "merged": "2026-11-19T11:31:33Z",
   "opened": "2026-11-19T11:02:48Z"
- },
- {
-  "repo": "mpv-player/mpv",
-  "number": 18874,
-  "title": "demux_edl: remove stray quote from two error messages",
-  "url": "https://github.com/mpv-player/mpv/pull/18874",
-  "merged": null,
-  "opened": "2026-11-21T19:16:35Z"
  },
  {
   "repo": "radareorg/sdb",
