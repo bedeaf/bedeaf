@@ -1,8 +1,16 @@
 [
  {
+  "repo": "radareorg/r2env",
+  "number": 38,
+  "title": "Fix standalone --list reporting a missing action",
+  "url": "https://github.com/radareorg/r2env/pull/38",
+  "merged": "2026-11-23T08:57:46Z",
+  "opened": "2026-11-23T07:32:13Z"
+ },
+ {
   "repo": "radareorg/radare2",
   "number": 27574,
-  "title": "graph scroll speed",
+  "title": "Fix graph scroll speed toggle",
   "url": "https://github.com/radareorg/radare2/pull/27574",
   "merged": "2026-11-23T00:43:07Z",
   "opened": "2026-11-21T18:48:20Z"
