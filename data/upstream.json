@@ -105,14 +105,6 @@
  },
  {
   "repo": "radareorg/radare2",
-  "number": 27558,
-  "title": "Print Cr metadata as a replayable command in C*",
-  "url": "https://github.com/radareorg/radare2/pull/27558",
-  "merged": null,
-  "opened": "2026-11-20T20:54:12Z"
- },
- {
-  "repo": "radareorg/radare2",
   "number": 27519,
   "title": "Update the style check command in CONTRIBUTING.md",
   "url": "https://github.com/radareorg/radare2/pull/27519",
