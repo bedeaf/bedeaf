@@ -1,5 +1,13 @@
 [
  {
+  "repo": "radareorg/radare2",
+  "number": 27519,
+  "title": "Update the style check command in CONTRIBUTING.md",
+  "url": "https://github.com/radareorg/radare2/pull/27519",
+  "merged": "2026-11-26T00:12:32Z",
+  "opened": "2026-11-19T11:22:08Z"
+ },
+ {
   "repo": "radareorg/r2env",
   "number": 38,
   "title": "Fix standalone --list reporting a missing action",
@@ -102,13 +110,5 @@
   "url": "https://github.com/yshui/picom/pull/1560",
   "merged": null,
   "opened": "2026-11-20T21:20:11Z"
- },
- {
-  "repo": "radareorg/radare2",
-  "number": 27519,
-  "title": "Update the style check command in CONTRIBUTING.md",
-  "url": "https://github.com/radareorg/radare2/pull/27519",
-  "merged": null,
-  "opened": "2026-11-19T11:22:08Z"
  }
 ]
